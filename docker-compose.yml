@@ -6,7 +6,7 @@ services:
     container_name: telegraf
     restart: always
     volumes:
-    - ./telegraf.conf:/etc/telegraf/telegraf.conf:ro
+    - ./telegraf/telegraf.conf:/etc/telegraf/telegraf.conf:ro
     depends_on:
       - influxdb
     links:
@@ -14,12 +14,12 @@ services:
     ports:
     - '8125:8125'
 
-  telegraf_host:
+  telegraf_second:
     image: telegraf
-    container_name: telegraf_host
+    container_name: telegraf_second
     restart: always
     volumes:
-    - ./telegraf_host.conf:/etc/telegraf/telegraf.conf:ro
+    - ./telegraf/telegraf_second.conf:/etc/telegraf/telegraf.conf:ro
     depends_on:
       - influxdb
     links:
@@ -41,7 +41,7 @@ services:
       - influxdb_data:/var/lib/influxdb
 
   grafana:
-    image: grafana/grafana
+    image: grafana/grafana-enterprise
     container_name: grafana
     restart: always
     depends_on:

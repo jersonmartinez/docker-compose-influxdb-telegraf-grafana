@@ -1,0 +1,133 @@
+[global_tags]
+  customer = "OpenWebinars"
+  environment = "Dev"
+  os = "Windows"
+
+[agent]
+  interval = "15s"
+  round_interval = true
+  metric_batch_size = 1000
+  metric_buffer_limit = 10000
+  collection_jitter = "0s"
+  flush_interval = "15s"
+  flush_jitter = "0s"
+  precision = ""
+  debug = false
+  quiet = false
+  logfile = "/Program Files/Telegraf/telegraf.log"
+  hostname = "openwebinars-dev"
+  omit_hostname = false
+
+
+###############################################################################
+#                                  OUTPUTS                                    #
+###############################################################################
+
+[[outputs.influxdb]]
+   urls = ["http://192.168.0.3:8086"]
+   database = "influx"
+   username = "telegraf"
+   password = "metricsmetricsmetricsmetrics"
+
+###############################################################################
+#                                  INPUTS                                     #
+###############################################################################
+
+[[inputs.win_perf_counters]]
+  [[inputs.win_perf_counters.object]]
+    ObjectName = "Processor"
+    Instances = ["*"]
+    Counters = [
+      "% Idle Time",
+      "% Interrupt Time",
+      "% Privileged Time",
+      "% User Time",
+      "% Processor Time",
+      "% DPC Time",
+    ]
+    Measurement = "win_cpu"
+    IncludeTotal=true
+
+  [[inputs.win_perf_counters.object]]
+    ObjectName = "LogicalDisk"
+    Instances = ["*"]
+    Counters = [
+      "% Idle Time",
+      "% Disk Time",
+      "% Disk Read Time",
+      "% Disk Write Time",
+      "Current Disk Queue Length",
+      "% Free Space",
+      "Free Megabytes",
+    ]
+    Measurement = "win_disk"
+
+  [[inputs.win_perf_counters.object]]
+    ObjectName = "PhysicalDisk"
+    Instances = ["*"]
+    Counters = [
+      "Disk Read Bytes/sec",
+      "Disk Write Bytes/sec",
+      "Current Disk Queue Length",
+      "Disk Reads/sec",
+      "Disk Writes/sec",
+      "% Disk Time",
+      "% Disk Read Time",
+      "% Disk Write Time",
+    ]
+    Measurement = "win_diskio"
+
+  [[inputs.win_perf_counters.object]]
+    ObjectName = "Network Interface"
+    Instances = ["*"]
+    Counters = [
+      "Bytes Received/sec",
+      "Bytes Sent/sec",
+      "Packets Received/sec",
+      "Packets Sent/sec",
+      "Packets Received Discarded",
+      "Packets Outbound Discarded",
+      "Packets Received Errors",
+      "Packets Outbound Errors",
+    ]
+    Measurement = "win_net"
+
+  [[inputs.win_perf_counters.object]]
+    ObjectName = "System"
+    Counters = [
+      "Context Switches/sec",
+      "System Calls/sec",
+      "Processor Queue Length",
+      "System Up Time",
+    ]
+    Instances = ["------"]
+    Measurement = "win_system"
+    # Set to true to include _Total instance when querying for all (*).
+    #IncludeTotal=false
+
+  [[inputs.win_perf_counters.object]]
+    ObjectName = "Memory"
+    Counters = [
+      "Available Bytes",
+      "Cache Faults/sec",
+      "Demand Zero Faults/sec",
+      "Page Faults/sec",
+      "Pages/sec",
+      "Transition Faults/sec",
+      "Pool Nonpaged Bytes",
+      "Pool Paged Bytes",
+      "Standby Cache Reserve Bytes",
+      "Standby Cache Normal Priority Bytes",
+      "Standby Cache Core Bytes",
+
+    ]
+    Instances = ["------"]
+    Measurement = "win_mem"
+
+  [[inputs.win_perf_counters.object]]
+    ObjectName = "Paging File"
+    Counters = [
+      "% Usage",
+    ]
+    Instances = ["_Total"]
+    Measurement = "win_swap"
