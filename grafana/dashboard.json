@@ -1,0 +1,2191 @@
+{
+    "annotations": {
+        "list": [
+            {
+                "builtIn": 1,
+                "datasource": "-- Grafana --",
+                "enable": true,
+                "hide": true,
+                "iconColor": "rgba(0, 211, 255, 1)",
+                "name": "Annotations & Alerts",
+                "target": {
+                    "limit": 100,
+                    "matchAny": false,
+                    "tags": [],
+                    "type": "dashboard"
+                },
+                "type": "dashboard"
+            }
+        ]
+    },
+    "editable": true,
+    "fiscalYearStartMonth": 0,
+    "graphTooltip": 0,
+    "id": 1,
+    "links": [],
+    "liveNow": false,
+    "panels": [
+        {
+            "gridPos": {
+                "h": 1,
+                "w": 24,
+                "x": 0,
+                "y": 0
+            },
+            "id": 19,
+            "title": "Docker Containers | Telegraf",
+            "type": "row"
+        },
+        {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "description": "",
+            "fill": 1,
+            "fillGradient": 0,
+            "gridPos": {
+                "h": 5,
+                "w": 4,
+                "x": 0,
+                "y": 1
+            },
+            "hiddenSeries": false,
+            "id": 20,
+            "legend": {
+                "alignAsTable": true,
+                "avg": true,
+                "current": false,
+                "max": true,
+                "min": true,
+                "show": true,
+                "total": false,
+                "values": true
+            },
+            "lines": true,
+            "linewidth": 1,
+            "nullPointMode": "null",
+            "options": {
+                "alertThreshold": true
+            },
+            "percentage": false,
+            "pluginVersion": "8.4.0-beta1",
+            "pointradius": 2,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+                {
+                    "alias": "$tag_host",
+                    "datasource": {
+                        "type": "influxdb",
+                        "uid": "ETp-mW-nz"
+                    },
+                    "groupBy": [
+                        {
+                            "params": [
+                                "$__interval"
+                            ],
+                            "type": "time"
+                        },
+                        {
+                            "params": [
+                                "linear"
+                            ],
+                            "type": "fill"
+                        }
+                    ],
+                    "measurement": "cpu",
+                    "orderByTime": "ASC",
+                    "policy": "default",
+                    "query": "SELECT mean(\"usage_guest\") FROM \"cpu\" WHERE (\"host\" = 'docker-telegraf' AND \"customer\" = 'OpenWebinars' AND \"os\" = 'Linux' AND \"environment\" = 'Dev') AND $timeFilter GROUP BY time($__interval) fill(linear)",
+                    "rawQuery": false,
+                    "refId": "A",
+                    "resultFormat": "time_series",
+                    "select": [
+                        [
+                            {
+                                "params": [
+                                    "usage_guest"
+                                ],
+                                "type": "field"
+                            },
+                            {
+                                "params": [],
+                                "type": "mean"
+                            }
+                        ]
+                    ],
+                    "tags": [
+                        {
+                            "key": "host",
+                            "operator": "=",
+                            "value": "docker-telegraf-second"
+                        },
+                        {
+                            "condition": "AND",
+                            "key": "customer",
+                            "operator": "=",
+                            "value": "OpenWebinars"
+                        },
+                        {
+                            "condition": "AND",
+                            "key": "os",
+                            "operator": "=",
+                            "value": "Linux"
+                        },
+                        {
+                            "condition": "AND",
+                            "key": "environment",
+                            "operator": "=",
+                            "value": "Dev"
+                        }
+                    ]
+                }
+            ],
+            "thresholds": [],
+            "timeRegions": [],
+            "title": "CPU",
+            "tooltip": {
+                "shared": true,
+                "sort": 0,
+                "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+                "mode": "time",
+                "show": true,
+                "values": []
+            },
+            "yaxes": [
+                {
+                    "$$hashKey": "object:41",
+                    "format": "percent",
+                    "logBase": 1,
+                    "max": "100",
+                    "min": "0",
+                    "show": true
+                },
+                {
+                    "$$hashKey": "object:42",
+                    "format": "short",
+                    "logBase": 1,
+                    "show": false
+                }
+            ],
+            "yaxis": {
+                "align": false
+            }
+        },
+        {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "description": "",
+            "fill": 1,
+            "fillGradient": 0,
+            "gridPos": {
+                "h": 5,
+                "w": 4,
+                "x": 4,
+                "y": 1
+            },
+            "hiddenSeries": false,
+            "id": 21,
+            "legend": {
+                "alignAsTable": true,
+                "avg": true,
+                "current": false,
+                "max": true,
+                "min": true,
+                "show": true,
+                "total": false,
+                "values": true
+            },
+            "lines": true,
+            "linewidth": 1,
+            "nullPointMode": "null",
+            "options": {
+                "alertThreshold": true
+            },
+            "percentage": false,
+            "pluginVersion": "8.4.0-beta1",
+            "pointradius": 2,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "influxdb",
+                        "uid": "ETp-mW-nz"
+                    },
+                    "groupBy": [
+                        {
+                            "params": [
+                                "$__interval"
+                            ],
+                            "type": "time"
+                        },
+                        {
+                            "params": [
+                                "null"
+                            ],
+                            "type": "fill"
+                        }
+                    ],
+                    "measurement": "cpu",
+                    "orderByTime": "ASC",
+                    "policy": "default",
+                    "query": "SELECT mean(\"usage_guest\") FROM \"cpu\" WHERE (\"host\" = 'docker-telegraf' AND \"customer\" = 'OpenWebinars' AND \"os\" = 'Linux' AND \"environment\" = 'Dev') AND $timeFilter GROUP BY time($__interval) fill(linear)",
+                    "rawQuery": false,
+                    "refId": "A",
+                    "resultFormat": "time_series",
+                    "select": [
+                        [
+                            {
+                                "params": [
+                                    "usage_guest"
+                                ],
+                                "type": "field"
+                            },
+                            {
+                                "params": [],
+                                "type": "count"
+                            }
+                        ]
+                    ],
+                    "tags": [
+                        {
+                            "key": "host",
+                            "operator": "=",
+                            "value": "docker-telegraf-second"
+                        },
+                        {
+                            "condition": "AND",
+                            "key": "customer",
+                            "operator": "=",
+                            "value": "OpenWebinars"
+                        },
+                        {
+                            "condition": "AND",
+                            "key": "os",
+                            "operator": "=",
+                            "value": "Linux"
+                        },
+                        {
+                            "condition": "AND",
+                            "key": "environment",
+                            "operator": "=",
+                            "value": "Dev"
+                        }
+                    ]
+                }
+            ],
+            "thresholds": [],
+            "timeRegions": [],
+            "title": "Memory",
+            "tooltip": {
+                "shared": true,
+                "sort": 0,
+                "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+                "mode": "time",
+                "show": true,
+                "values": []
+            },
+            "yaxes": [
+                {
+                    "$$hashKey": "object:261",
+                    "format": "decbytes",
+                    "logBase": 1,
+                    "max": "4589934592",
+                    "min": "0",
+                    "show": true
+                },
+                {
+                    "$$hashKey": "object:262",
+                    "format": "short",
+                    "logBase": 1,
+                    "show": false
+                }
+            ],
+            "yaxis": {
+                "align": false
+            }
+        },
+        {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "description": "",
+            "fill": 1,
+            "fillGradient": 0,
+            "gridPos": {
+                "h": 5,
+                "w": 4,
+                "x": 8,
+                "y": 1
+            },
+            "hiddenSeries": false,
+            "id": 22,
+            "legend": {
+                "alignAsTable": true,
+                "avg": true,
+                "current": false,
+                "max": true,
+                "min": true,
+                "show": true,
+                "total": false,
+                "values": true
+            },
+            "lines": true,
+            "linewidth": 1,
+            "nullPointMode": "null",
+            "options": {
+                "alertThreshold": true
+            },
+            "percentage": false,
+            "pluginVersion": "8.4.0-beta1",
+            "pointradius": 2,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "influxdb",
+                        "uid": "ETp-mW-nz"
+                    },
+                    "groupBy": [
+                        {
+                            "params": [
+                                "$__interval"
+                            ],
+                            "type": "time"
+                        },
+                        {
+                            "params": [
+                                "null"
+                            ],
+                            "type": "fill"
+                        }
+                    ],
+                    "measurement": "disk",
+                    "orderByTime": "ASC",
+                    "policy": "default",
+                    "query": "SELECT mean(\"usage_guest\") FROM \"cpu\" WHERE (\"host\" = 'docker-telegraf' AND \"customer\" = 'OpenWebinars' AND \"os\" = 'Linux' AND \"environment\" = 'Dev') AND $timeFilter GROUP BY time($__interval) fill(linear)",
+                    "rawQuery": false,
+                    "refId": "A",
+                    "resultFormat": "time_series",
+                    "select": [
+                        [
+                            {
+                                "params": [
+                                    "free"
+                                ],
+                                "type": "field"
+                            },
+                            {
+                                "params": [],
+                                "type": "count"
+                            }
+                        ]
+                    ],
+                    "tags": [
+                        {
+                            "key": "host",
+                            "operator": "=",
+                            "value": "docker-telegraf-second"
+                        },
+                        {
+                            "condition": "AND",
+                            "key": "customer",
+                            "operator": "=",
+                            "value": "OpenWebinars"
+                        },
+                        {
+                            "condition": "AND",
+                            "key": "os",
+                            "operator": "=",
+                            "value": "Linux"
+                        },
+                        {
+                            "condition": "AND",
+                            "key": "environment",
+                            "operator": "=",
+                            "value": "Dev"
+                        }
+                    ]
+                }
+            ],
+            "thresholds": [],
+            "timeRegions": [],
+            "title": "Disk",
+            "tooltip": {
+                "shared": true,
+                "sort": 0,
+                "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+                "mode": "time",
+                "show": true,
+                "values": []
+            },
+            "yaxes": [
+                {
+                    "$$hashKey": "object:261",
+                    "format": "decmbytes",
+                    "logBase": 1,
+                    "max": "8000",
+                    "min": "0",
+                    "show": true
+                },
+                {
+                    "$$hashKey": "object:262",
+                    "format": "short",
+                    "logBase": 1,
+                    "show": false
+                }
+            ],
+            "yaxis": {
+                "align": false
+            }
+        },
+        {
+            "alert": {
+                "alertRuleTags": {},
+                "conditions": [
+                    {
+                        "evaluator": {
+                            "params": [
+                                80
+                            ],
+                            "type": "gt"
+                        },
+                        "operator": {
+                            "type": "and"
+                        },
+                        "query": {
+                            "params": [
+                                "A",
+                                "5m",
+                                "now"
+                            ]
+                        },
+                        "reducer": {
+                            "params": [],
+                            "type": "avg"
+                        },
+                        "type": "query"
+                    }
+                ],
+                "executionErrorState": "alerting",
+                "for": "5m",
+                "frequency": "1m",
+                "handler": 1,
+                "name": "CPU alert",
+                "noDataState": "no_data",
+                "notifications": []
+            },
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "description": "",
+            "fill": 1,
+            "fillGradient": 0,
+            "gridPos": {
+                "h": 5,
+                "w": 4,
+                "x": 12,
+                "y": 1
+            },
+            "hiddenSeries": false,
+            "id": 2,
+            "legend": {
+                "alignAsTable": true,
+                "avg": true,
+                "current": false,
+                "max": true,
+                "min": true,
+                "show": true,
+                "total": false,
+                "values": true
+            },
+            "lines": true,
+            "linewidth": 1,
+            "nullPointMode": "null",
+            "options": {
+                "alertThreshold": true
+            },
+            "percentage": false,
+            "pluginVersion": "8.4.0-beta1",
+            "pointradius": 2,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+                {
+                    "alias": "$tag_host",
+                    "datasource": {
+                        "type": "influxdb",
+                        "uid": "ETp-mW-nz"
+                    },
+                    "groupBy": [
+                        {
+                            "params": [
+                                "$__interval"
+                            ],
+                            "type": "time"
+                        },
+                        {
+                            "params": [
+                                "linear"
+                            ],
+                            "type": "fill"
+                        }
+                    ],
+                    "measurement": "cpu",
+                    "orderByTime": "ASC",
+                    "policy": "default",
+                    "query": "SELECT mean(\"usage_guest\") FROM \"cpu\" WHERE (\"host\" = 'docker-telegraf' AND \"customer\" = 'OpenWebinars' AND \"os\" = 'Linux' AND \"environment\" = 'Dev') AND $timeFilter GROUP BY time($__interval) fill(linear)",
+                    "rawQuery": false,
+                    "refId": "A",
+                    "resultFormat": "time_series",
+                    "select": [
+                        [
+                            {
+                                "params": [
+                                    "usage_guest"
+                                ],
+                                "type": "field"
+                            },
+                            {
+                                "params": [],
+                                "type": "mean"
+                            }
+                        ]
+                    ],
+                    "tags": [
+                        {
+                            "key": "host",
+                            "operator": "=",
+                            "value": "docker-telegraf"
+                        },
+                        {
+                            "condition": "AND",
+                            "key": "customer",
+                            "operator": "=",
+                            "value": "OpenWebinars"
+                        },
+                        {
+                            "condition": "AND",
+                            "key": "os",
+                            "operator": "=",
+                            "value": "Linux"
+                        },
+                        {
+                            "condition": "AND",
+                            "key": "environment",
+                            "operator": "=",
+                            "value": "Dev"
+                        }
+                    ]
+                }
+            ],
+            "thresholds": [
+                {
+                    "colorMode": "critical",
+                    "fill": true,
+                    "line": true,
+                    "op": "gt",
+                    "value": 80,
+                    "visible": true
+                }
+            ],
+            "timeRegions": [],
+            "title": "CPU",
+            "tooltip": {
+                "shared": true,
+                "sort": 0,
+                "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+                "mode": "time",
+                "show": true,
+                "values": []
+            },
+            "yaxes": [
+                {
+                    "$$hashKey": "object:41",
+                    "format": "percent",
+                    "logBase": 1,
+                    "max": "100",
+                    "min": "0",
+                    "show": true
+                },
+                {
+                    "$$hashKey": "object:42",
+                    "format": "short",
+                    "logBase": 1,
+                    "show": false
+                }
+            ],
+            "yaxis": {
+                "align": false
+            }
+        },
+        {
+            "alert": {
+                "alertRuleTags": {},
+                "conditions": [
+                    {
+                        "evaluator": {
+                            "params": [
+                                253999999
+                            ],
+                            "type": "lt"
+                        },
+                        "operator": {
+                            "type": "and"
+                        },
+                        "query": {
+                            "params": [
+                                "A",
+                                "5m",
+                                "now"
+                            ]
+                        },
+                        "reducer": {
+                            "params": [],
+                            "type": "avg"
+                        },
+                        "type": "query"
+                    }
+                ],
+                "executionErrorState": "alerting",
+                "for": "5m",
+                "frequency": "1m",
+                "handler": 1,
+                "name": "Memory alert",
+                "noDataState": "no_data",
+                "notifications": []
+            },
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "description": "",
+            "fill": 1,
+            "fillGradient": 0,
+            "gridPos": {
+                "h": 5,
+                "w": 4,
+                "x": 16,
+                "y": 1
+            },
+            "hiddenSeries": false,
+            "id": 5,
+            "legend": {
+                "alignAsTable": true,
+                "avg": true,
+                "current": false,
+                "max": true,
+                "min": true,
+                "show": true,
+                "total": false,
+                "values": true
+            },
+            "lines": true,
+            "linewidth": 1,
+            "nullPointMode": "null",
+            "options": {
+                "alertThreshold": true
+            },
+            "percentage": false,
+            "pluginVersion": "8.4.0-beta1",
+            "pointradius": 2,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "influxdb",
+                        "uid": "ETp-mW-nz"
+                    },
+                    "groupBy": [
+                        {
+                            "params": [
+                                "$__interval"
+                            ],
+                            "type": "time"
+                        },
+                        {
+                            "params": [
+                                "null"
+                            ],
+                            "type": "fill"
+                        }
+                    ],
+                    "measurement": "cpu",
+                    "orderByTime": "ASC",
+                    "policy": "default",
+                    "query": "SELECT mean(\"usage_guest\") FROM \"cpu\" WHERE (\"host\" = 'docker-telegraf' AND \"customer\" = 'OpenWebinars' AND \"os\" = 'Linux' AND \"environment\" = 'Dev') AND $timeFilter GROUP BY time($__interval) fill(linear)",
+                    "rawQuery": false,
+                    "refId": "A",
+                    "resultFormat": "time_series",
+                    "select": [
+                        [
+                            {
+                                "params": [
+                                    "usage_guest"
+                                ],
+                                "type": "field"
+                            },
+                            {
+                                "params": [],
+                                "type": "count"
+                            }
+                        ]
+                    ],
+                    "tags": [
+                        {
+                            "key": "host",
+                            "operator": "=",
+                            "value": "docker-telegraf"
+                        },
+                        {
+                            "condition": "AND",
+                            "key": "customer",
+                            "operator": "=",
+                            "value": "OpenWebinars"
+                        },
+                        {
+                            "condition": "AND",
+                            "key": "os",
+                            "operator": "=",
+                            "value": "Linux"
+                        },
+                        {
+                            "condition": "AND",
+                            "key": "environment",
+                            "operator": "=",
+                            "value": "Dev"
+                        }
+                    ]
+                }
+            ],
+            "thresholds": [
+                {
+                    "colorMode": "critical",
+                    "fill": true,
+                    "line": true,
+                    "op": "lt",
+                    "value": 253999999,
+                    "visible": true
+                }
+            ],
+            "timeRegions": [],
+            "title": "Memory",
+            "tooltip": {
+                "shared": true,
+                "sort": 0,
+                "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+                "mode": "time",
+                "show": true,
+                "values": []
+            },
+            "yaxes": [
+                {
+                    "$$hashKey": "object:261",
+                    "format": "decbytes",
+                    "logBase": 1,
+                    "max": "4589934592",
+                    "min": "0",
+                    "show": true
+                },
+                {
+                    "$$hashKey": "object:262",
+                    "format": "short",
+                    "logBase": 1,
+                    "show": false
+                }
+            ],
+            "yaxis": {
+                "align": false
+            }
+        },
+        {
+            "alert": {
+                "alertRuleTags": {},
+                "conditions": [
+                    {
+                        "evaluator": {
+                            "params": [
+                                1000
+                            ],
+                            "type": "lt"
+                        },
+                        "operator": {
+                            "type": "and"
+                        },
+                        "query": {
+                            "params": [
+                                "A",
+                                "5m",
+                                "now"
+                            ]
+                        },
+                        "reducer": {
+                            "params": [],
+                            "type": "avg"
+                        },
+                        "type": "query"
+                    }
+                ],
+                "executionErrorState": "alerting",
+                "for": "5m",
+                "frequency": "1m",
+                "handler": 1,
+                "name": "Disk alert",
+                "noDataState": "no_data",
+                "notifications": []
+            },
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "description": "",
+            "fill": 1,
+            "fillGradient": 0,
+            "gridPos": {
+                "h": 5,
+                "w": 4,
+                "x": 20,
+                "y": 1
+            },
+            "hiddenSeries": false,
+            "id": 12,
+            "legend": {
+                "alignAsTable": true,
+                "avg": true,
+                "current": false,
+                "max": true,
+                "min": true,
+                "show": true,
+                "total": false,
+                "values": true
+            },
+            "lines": true,
+            "linewidth": 1,
+            "nullPointMode": "null",
+            "options": {
+                "alertThreshold": true
+            },
+            "percentage": false,
+            "pluginVersion": "8.4.0-beta1",
+            "pointradius": 2,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "influxdb",
+                        "uid": "ETp-mW-nz"
+                    },
+                    "groupBy": [
+                        {
+                            "params": [
+                                "$__interval"
+                            ],
+                            "type": "time"
+                        },
+                        {
+                            "params": [
+                                "null"
+                            ],
+                            "type": "fill"
+                        }
+                    ],
+                    "measurement": "disk",
+                    "orderByTime": "ASC",
+                    "policy": "default",
+                    "query": "SELECT mean(\"usage_guest\") FROM \"cpu\" WHERE (\"host\" = 'docker-telegraf' AND \"customer\" = 'OpenWebinars' AND \"os\" = 'Linux' AND \"environment\" = 'Dev') AND $timeFilter GROUP BY time($__interval) fill(linear)",
+                    "rawQuery": false,
+                    "refId": "A",
+                    "resultFormat": "time_series",
+                    "select": [
+                        [
+                            {
+                                "params": [
+                                    "free"
+                                ],
+                                "type": "field"
+                            },
+                            {
+                                "params": [],
+                                "type": "count"
+                            }
+                        ]
+                    ],
+                    "tags": [
+                        {
+                            "key": "host",
+                            "operator": "=",
+                            "value": "docker-telegraf"
+                        },
+                        {
+                            "condition": "AND",
+                            "key": "customer",
+                            "operator": "=",
+                            "value": "OpenWebinars"
+                        },
+                        {
+                            "condition": "AND",
+                            "key": "os",
+                            "operator": "=",
+                            "value": "Linux"
+                        },
+                        {
+                            "condition": "AND",
+                            "key": "environment",
+                            "operator": "=",
+                            "value": "Dev"
+                        }
+                    ]
+                }
+            ],
+            "thresholds": [
+                {
+                    "colorMode": "critical",
+                    "fill": true,
+                    "line": true,
+                    "op": "lt",
+                    "value": 1000,
+                    "visible": true
+                }
+            ],
+            "timeRegions": [],
+            "title": "Disk",
+            "tooltip": {
+                "shared": true,
+                "sort": 0,
+                "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+                "mode": "time",
+                "show": true,
+                "values": []
+            },
+            "yaxes": [
+                {
+                    "$$hashKey": "object:261",
+                    "format": "decmbytes",
+                    "logBase": 1,
+                    "max": "8000",
+                    "min": "0",
+                    "show": true
+                },
+                {
+                    "$$hashKey": "object:262",
+                    "format": "short",
+                    "logBase": 1,
+                    "show": false
+                }
+            ],
+            "yaxis": {
+                "align": false
+            }
+        },
+        {
+            "gridPos": {
+                "h": 1,
+                "w": 24,
+                "x": 0,
+                "y": 6
+            },
+            "id": 14,
+            "title": "Debian",
+            "type": "row"
+        },
+        {
+            "alert": {
+                "alertRuleTags": {},
+                "conditions": [
+                    {
+                        "evaluator": {
+                            "params": [
+                                80
+                            ],
+                            "type": "gt"
+                        },
+                        "operator": {
+                            "type": "and"
+                        },
+                        "query": {
+                            "params": [
+                                "A",
+                                "5m",
+                                "now"
+                            ]
+                        },
+                        "reducer": {
+                            "params": [],
+                            "type": "avg"
+                        },
+                        "type": "query"
+                    }
+                ],
+                "executionErrorState": "alerting",
+                "for": "5m",
+                "frequency": "1m",
+                "handler": 1,
+                "name": "CPU alert",
+                "noDataState": "no_data",
+                "notifications": []
+            },
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "description": "",
+            "fill": 2,
+            "fillGradient": 4,
+            "gridPos": {
+                "h": 6,
+                "w": 8,
+                "x": 0,
+                "y": 7
+            },
+            "hiddenSeries": false,
+            "id": 15,
+            "legend": {
+                "alignAsTable": true,
+                "avg": true,
+                "current": false,
+                "hideEmpty": false,
+                "hideZero": false,
+                "max": true,
+                "min": true,
+                "rightSide": false,
+                "show": true,
+                "total": false,
+                "values": true
+            },
+            "lines": true,
+            "linewidth": 2,
+            "nullPointMode": "null",
+            "options": {
+                "alertThreshold": true
+            },
+            "percentage": false,
+            "pluginVersion": "8.4.0-beta1",
+            "pointradius": 2,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+                {
+                    "alias": "$tag_host",
+                    "datasource": {
+                        "type": "influxdb",
+                        "uid": "ETp-mW-nz"
+                    },
+                    "groupBy": [
+                        {
+                            "params": [
+                                "$__interval"
+                            ],
+                            "type": "time"
+                        },
+                        {
+                            "params": [
+                                "host"
+                            ],
+                            "type": "tag"
+                        },
+                        {
+                            "params": [
+                                "linear"
+                            ],
+                            "type": "fill"
+                        }
+                    ],
+                    "measurement": "cpu",
+                    "orderByTime": "ASC",
+                    "policy": "default",
+                    "refId": "A",
+                    "resultFormat": "time_series",
+                    "select": [
+                        [
+                            {
+                                "params": [
+                                    "usage_guest"
+                                ],
+                                "type": "field"
+                            },
+                            {
+                                "params": [],
+                                "type": "mean"
+                            }
+                        ]
+                    ],
+                    "tags": [
+                        {
+                            "key": "host",
+                            "operator": "=",
+                            "value": "WSL-debian"
+                        },
+                        {
+                            "condition": "AND",
+                            "key": "customer",
+                            "operator": "=",
+                            "value": "OpenWebinars"
+                        },
+                        {
+                            "condition": "AND",
+                            "key": "os",
+                            "operator": "=",
+                            "value": "Linux"
+                        },
+                        {
+                            "condition": "AND",
+                            "key": "environment",
+                            "operator": "=",
+                            "value": "Dev"
+                        }
+                    ]
+                }
+            ],
+            "thresholds": [
+                {
+                    "colorMode": "critical",
+                    "fill": true,
+                    "line": true,
+                    "op": "gt",
+                    "value": 80,
+                    "visible": true
+                }
+            ],
+            "timeRegions": [],
+            "title": "CPU",
+            "tooltip": {
+                "shared": true,
+                "sort": 0,
+                "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+                "mode": "time",
+                "show": true,
+                "values": []
+            },
+            "yaxes": [
+                {
+                    "$$hashKey": "object:132",
+                    "format": "percent",
+                    "label": "",
+                    "logBase": 1,
+                    "max": "100",
+                    "min": "0",
+                    "show": true
+                },
+                {
+                    "$$hashKey": "object:133",
+                    "format": "linear",
+                    "label": "",
+                    "logBase": 1,
+                    "show": true
+                }
+            ],
+            "yaxis": {
+                "align": false
+            }
+        },
+        {
+            "alert": {
+                "alertRuleTags": {},
+                "conditions": [
+                    {
+                        "evaluator": {
+                            "params": [
+                                10050000000
+                            ],
+                            "type": "lt"
+                        },
+                        "operator": {
+                            "type": "and"
+                        },
+                        "query": {
+                            "params": [
+                                "A",
+                                "5m",
+                                "now"
+                            ]
+                        },
+                        "reducer": {
+                            "params": [],
+                            "type": "avg"
+                        },
+                        "type": "query"
+                    }
+                ],
+                "executionErrorState": "alerting",
+                "for": "5m",
+                "frequency": "1m",
+                "handler": 1,
+                "name": "Memory alert",
+                "noDataState": "no_data",
+                "notifications": []
+            },
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "description": "",
+            "fill": 2,
+            "fillGradient": 4,
+            "gridPos": {
+                "h": 6,
+                "w": 8,
+                "x": 8,
+                "y": 7
+            },
+            "hiddenSeries": false,
+            "id": 16,
+            "legend": {
+                "alignAsTable": true,
+                "avg": true,
+                "current": false,
+                "hideEmpty": false,
+                "hideZero": false,
+                "max": true,
+                "min": true,
+                "rightSide": false,
+                "show": true,
+                "total": false,
+                "values": true
+            },
+            "lines": true,
+            "linewidth": 2,
+            "nullPointMode": "null",
+            "options": {
+                "alertThreshold": true
+            },
+            "percentage": false,
+            "pluginVersion": "8.4.0-beta1",
+            "pointradius": 2,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+                {
+                    "alias": "$tag_host",
+                    "datasource": {
+                        "type": "influxdb",
+                        "uid": "ETp-mW-nz"
+                    },
+                    "groupBy": [
+                        {
+                            "params": [
+                                "host"
+                            ],
+                            "type": "tag"
+                        }
+                    ],
+                    "measurement": "mem",
+                    "orderByTime": "ASC",
+                    "policy": "default",
+                    "query": "SELECT mean(\"Available_Bytes\") FROM \"win_mem\" WHERE (\"customer\" = 'OpenWebinars') AND $timeFilter GROUP BY time($__interval), \"host\" fill(linear)",
+                    "rawQuery": false,
+                    "refId": "A",
+                    "resultFormat": "time_series",
+                    "select": [
+                        [
+                            {
+                                "params": [
+                                    "available"
+                                ],
+                                "type": "field"
+                            }
+                        ]
+                    ],
+                    "tags": [
+                        {
+                            "key": "host",
+                            "operator": "=",
+                            "value": "WSL-debian"
+                        },
+                        {
+                            "condition": "AND",
+                            "key": "customer",
+                            "operator": "=",
+                            "value": "OpenWebinars"
+                        },
+                        {
+                            "condition": "AND",
+                            "key": "os",
+                            "operator": "=",
+                            "value": "Linux"
+                        },
+                        {
+                            "condition": "AND",
+                            "key": "environment",
+                            "operator": "=",
+                            "value": "Dev"
+                        }
+                    ]
+                }
+            ],
+            "thresholds": [
+                {
+                    "colorMode": "critical",
+                    "fill": true,
+                    "line": true,
+                    "op": "lt",
+                    "value": 10050000000,
+                    "visible": true
+                }
+            ],
+            "timeRegions": [],
+            "title": "Memory",
+            "tooltip": {
+                "shared": true,
+                "sort": 0,
+                "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+                "mode": "time",
+                "show": true,
+                "values": []
+            },
+            "yaxes": [
+                {
+                    "$$hashKey": "object:132",
+                    "format": "decbytes",
+                    "label": "",
+                    "logBase": 1,
+                    "max": "64589934592",
+                    "min": "0",
+                    "show": true
+                },
+                {
+                    "$$hashKey": "object:133",
+                    "format": "linear",
+                    "label": "",
+                    "logBase": 1,
+                    "show": true
+                }
+            ],
+            "yaxis": {
+                "align": false
+            }
+        },
+        {
+            "alert": {
+                "alertRuleTags": {},
+                "conditions": [
+                    {
+                        "evaluator": {
+                            "params": [
+                                103400000000
+                            ],
+                            "type": "gt"
+                        },
+                        "operator": {
+                            "type": "and"
+                        },
+                        "query": {
+                            "params": [
+                                "A",
+                                "5m",
+                                "now"
+                            ]
+                        },
+                        "reducer": {
+                            "params": [],
+                            "type": "avg"
+                        },
+                        "type": "query"
+                    }
+                ],
+                "executionErrorState": "alerting",
+                "for": "5m",
+                "frequency": "1m",
+                "handler": 1,
+                "name": "Disk alert",
+                "noDataState": "no_data",
+                "notifications": []
+            },
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "description": "",
+            "fill": 2,
+            "fillGradient": 4,
+            "gridPos": {
+                "h": 6,
+                "w": 8,
+                "x": 16,
+                "y": 7
+            },
+            "hiddenSeries": false,
+            "id": 17,
+            "legend": {
+                "alignAsTable": true,
+                "avg": true,
+                "current": false,
+                "hideEmpty": false,
+                "hideZero": false,
+                "max": true,
+                "min": true,
+                "rightSide": false,
+                "show": true,
+                "total": false,
+                "values": true
+            },
+            "lines": true,
+            "linewidth": 2,
+            "nullPointMode": "null",
+            "options": {
+                "alertThreshold": true
+            },
+            "percentage": false,
+            "pluginVersion": "8.4.0-beta1",
+            "pointradius": 2,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+                {
+                    "alias": "$tag_host",
+                    "datasource": {
+                        "type": "influxdb",
+                        "uid": "ETp-mW-nz"
+                    },
+                    "groupBy": [
+                        {
+                            "params": [
+                                "host"
+                            ],
+                            "type": "tag"
+                        }
+                    ],
+                    "measurement": "disk",
+                    "orderByTime": "ASC",
+                    "policy": "default",
+                    "refId": "A",
+                    "resultFormat": "time_series",
+                    "select": [
+                        [
+                            {
+                                "params": [
+                                    "free"
+                                ],
+                                "type": "field"
+                            }
+                        ]
+                    ],
+                    "tags": [
+                        {
+                            "key": "host",
+                            "operator": "=",
+                            "value": "WSL-debian"
+                        },
+                        {
+                            "condition": "AND",
+                            "key": "customer",
+                            "operator": "=",
+                            "value": "OpenWebinars"
+                        },
+                        {
+                            "condition": "AND",
+                            "key": "os",
+                            "operator": "=",
+                            "value": "Linux"
+                        },
+                        {
+                            "condition": "AND",
+                            "key": "environment",
+                            "operator": "=",
+                            "value": "Dev"
+                        }
+                    ]
+                }
+            ],
+            "thresholds": [
+                {
+                    "colorMode": "critical",
+                    "fill": true,
+                    "line": true,
+                    "op": "gt",
+                    "value": 103400000000,
+                    "visible": true
+                }
+            ],
+            "timeRegions": [],
+            "title": "Disk",
+            "tooltip": {
+                "shared": true,
+                "sort": 0,
+                "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+                "mode": "time",
+                "show": true,
+                "values": []
+            },
+            "yaxes": [
+                {
+                    "$$hashKey": "object:132",
+                    "format": "decmbytes",
+                    "label": "",
+                    "logBase": 1,
+                    "max": "701111130000",
+                    "min": "0",
+                    "show": true
+                },
+                {
+                    "$$hashKey": "object:133",
+                    "format": "linear",
+                    "label": "",
+                    "logBase": 1,
+                    "show": false
+                }
+            ],
+            "yaxis": {
+                "align": false
+            }
+        },
+        {
+            "gridPos": {
+                "h": 1,
+                "w": 24,
+                "x": 0,
+                "y": 13
+            },
+            "id": 7,
+            "title": "Windows 11",
+            "type": "row"
+        },
+        {
+            "alert": {
+                "alertRuleTags": {},
+                "conditions": [
+                    {
+                        "evaluator": {
+                            "params": [
+                                80
+                            ],
+                            "type": "gt"
+                        },
+                        "operator": {
+                            "type": "and"
+                        },
+                        "query": {
+                            "params": [
+                                "A",
+                                "5m",
+                                "now"
+                            ]
+                        },
+                        "reducer": {
+                            "params": [],
+                            "type": "avg"
+                        },
+                        "type": "query"
+                    }
+                ],
+                "executionErrorState": "alerting",
+                "for": "5m",
+                "frequency": "1m",
+                "handler": 1,
+                "name": "CPU alert",
+                "noDataState": "no_data",
+                "notifications": []
+            },
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "description": "",
+            "fill": 2,
+            "fillGradient": 4,
+            "gridPos": {
+                "h": 9,
+                "w": 8,
+                "x": 0,
+                "y": 14
+            },
+            "hiddenSeries": false,
+            "id": 3,
+            "legend": {
+                "alignAsTable": true,
+                "avg": true,
+                "current": false,
+                "hideEmpty": false,
+                "hideZero": false,
+                "max": true,
+                "min": true,
+                "rightSide": false,
+                "show": true,
+                "total": false,
+                "values": true
+            },
+            "lines": true,
+            "linewidth": 2,
+            "nullPointMode": "null",
+            "options": {
+                "alertThreshold": true
+            },
+            "percentage": false,
+            "pluginVersion": "8.4.0-beta1",
+            "pointradius": 2,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+                {
+                    "alias": "$tag_host",
+                    "datasource": {
+                        "type": "influxdb",
+                        "uid": "ETp-mW-nz"
+                    },
+                    "groupBy": [
+                        {
+                            "params": [
+                                "$__interval"
+                            ],
+                            "type": "time"
+                        },
+                        {
+                            "params": [
+                                "host"
+                            ],
+                            "type": "tag"
+                        },
+                        {
+                            "params": [
+                                "linear"
+                            ],
+                            "type": "fill"
+                        }
+                    ],
+                    "measurement": "win_cpu",
+                    "orderByTime": "ASC",
+                    "policy": "default",
+                    "refId": "A",
+                    "resultFormat": "time_series",
+                    "select": [
+                        [
+                            {
+                                "params": [
+                                    "Percent_Processor_Time"
+                                ],
+                                "type": "field"
+                            },
+                            {
+                                "params": [],
+                                "type": "mean"
+                            }
+                        ]
+                    ],
+                    "tags": [
+                        {
+                            "key": "host",
+                            "operator": "=",
+                            "value": "openwebinars-dev"
+                        },
+                        {
+                            "condition": "AND",
+                            "key": "customer",
+                            "operator": "=",
+                            "value": "OpenWebinars"
+                        },
+                        {
+                            "condition": "AND",
+                            "key": "os",
+                            "operator": "=",
+                            "value": "Windows"
+                        }
+                    ]
+                }
+            ],
+            "thresholds": [
+                {
+                    "colorMode": "critical",
+                    "fill": true,
+                    "line": true,
+                    "op": "gt",
+                    "value": 80,
+                    "visible": true
+                }
+            ],
+            "timeRegions": [],
+            "title": "CPU",
+            "tooltip": {
+                "shared": true,
+                "sort": 0,
+                "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+                "mode": "time",
+                "show": true,
+                "values": []
+            },
+            "yaxes": [
+                {
+                    "$$hashKey": "object:132",
+                    "format": "percent",
+                    "label": "",
+                    "logBase": 1,
+                    "max": "100",
+                    "min": "0",
+                    "show": true
+                },
+                {
+                    "$$hashKey": "object:133",
+                    "format": "linear",
+                    "label": "",
+                    "logBase": 1,
+                    "show": true
+                }
+            ],
+            "yaxis": {
+                "align": false
+            }
+        },
+        {
+            "alert": {
+                "alertRuleTags": {},
+                "conditions": [
+                    {
+                        "evaluator": {
+                            "params": [
+                                253999999
+                            ],
+                            "type": "lt"
+                        },
+                        "operator": {
+                            "type": "and"
+                        },
+                        "query": {
+                            "params": [
+                                "A",
+                                "5m",
+                                "now"
+                            ]
+                        },
+                        "reducer": {
+                            "params": [],
+                            "type": "avg"
+                        },
+                        "type": "query"
+                    }
+                ],
+                "executionErrorState": "alerting",
+                "for": "5m",
+                "frequency": "1m",
+                "handler": 1,
+                "name": "Memory alert",
+                "noDataState": "no_data",
+                "notifications": []
+            },
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "description": "",
+            "fill": 2,
+            "fillGradient": 4,
+            "gridPos": {
+                "h": 9,
+                "w": 8,
+                "x": 8,
+                "y": 14
+            },
+            "hiddenSeries": false,
+            "id": 8,
+            "legend": {
+                "alignAsTable": true,
+                "avg": true,
+                "current": false,
+                "hideEmpty": false,
+                "hideZero": false,
+                "max": true,
+                "min": true,
+                "rightSide": false,
+                "show": true,
+                "total": false,
+                "values": true
+            },
+            "lines": true,
+            "linewidth": 2,
+            "nullPointMode": "null",
+            "options": {
+                "alertThreshold": true
+            },
+            "percentage": false,
+            "pluginVersion": "8.4.0-beta1",
+            "pointradius": 2,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+                {
+                    "alias": "$tag_host",
+                    "datasource": {
+                        "type": "influxdb",
+                        "uid": "ETp-mW-nz"
+                    },
+                    "groupBy": [
+                        {
+                            "params": [
+                                "host"
+                            ],
+                            "type": "tag"
+                        }
+                    ],
+                    "measurement": "win_mem",
+                    "orderByTime": "ASC",
+                    "policy": "default",
+                    "query": "SELECT mean(\"Available_Bytes\") FROM \"win_mem\" WHERE (\"customer\" = 'OpenWebinars') AND $timeFilter GROUP BY time($__interval), \"host\" fill(linear)",
+                    "rawQuery": false,
+                    "refId": "A",
+                    "resultFormat": "time_series",
+                    "select": [
+                        [
+                            {
+                                "params": [
+                                    "Available_Bytes"
+                                ],
+                                "type": "field"
+                            }
+                        ]
+                    ],
+                    "tags": [
+                        {
+                            "key": "host",
+                            "operator": "=",
+                            "value": "openwebinars-dev"
+                        },
+                        {
+                            "condition": "AND",
+                            "key": "customer",
+                            "operator": "=",
+                            "value": "OpenWebinars"
+                        },
+                        {
+                            "condition": "AND",
+                            "key": "os",
+                            "operator": "=",
+                            "value": "Windows"
+                        }
+                    ]
+                }
+            ],
+            "thresholds": [
+                {
+                    "colorMode": "critical",
+                    "fill": true,
+                    "line": true,
+                    "op": "lt",
+                    "value": 253999999,
+                    "visible": true
+                }
+            ],
+            "timeRegions": [],
+            "title": "Memory",
+            "tooltip": {
+                "shared": true,
+                "sort": 0,
+                "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+                "mode": "time",
+                "show": true,
+                "values": []
+            },
+            "yaxes": [
+                {
+                    "$$hashKey": "object:132",
+                    "format": "decbytes",
+                    "label": "",
+                    "logBase": 1,
+                    "max": "4589934592",
+                    "min": "0",
+                    "show": true
+                },
+                {
+                    "$$hashKey": "object:133",
+                    "format": "linear",
+                    "label": "",
+                    "logBase": 1,
+                    "show": true
+                }
+            ],
+            "yaxis": {
+                "align": false
+            }
+        },
+        {
+            "alert": {
+                "alertRuleTags": {},
+                "conditions": [
+                    {
+                        "evaluator": {
+                            "params": [
+                                10000
+                            ],
+                            "type": "lt"
+                        },
+                        "operator": {
+                            "type": "and"
+                        },
+                        "query": {
+                            "params": [
+                                "A",
+                                "5m",
+                                "now"
+                            ]
+                        },
+                        "reducer": {
+                            "params": [],
+                            "type": "avg"
+                        },
+                        "type": "query"
+                    }
+                ],
+                "executionErrorState": "alerting",
+                "for": "5m",
+                "frequency": "1m",
+                "handler": 1,
+                "name": "Disk alert",
+                "noDataState": "no_data",
+                "notifications": []
+            },
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "description": "",
+            "fill": 2,
+            "fillGradient": 4,
+            "gridPos": {
+                "h": 9,
+                "w": 8,
+                "x": 16,
+                "y": 14
+            },
+            "hiddenSeries": false,
+            "id": 9,
+            "legend": {
+                "alignAsTable": true,
+                "avg": true,
+                "current": false,
+                "hideEmpty": false,
+                "hideZero": false,
+                "max": true,
+                "min": true,
+                "rightSide": false,
+                "show": true,
+                "total": false,
+                "values": true
+            },
+            "lines": true,
+            "linewidth": 2,
+            "nullPointMode": "null",
+            "options": {
+                "alertThreshold": true
+            },
+            "percentage": false,
+            "pluginVersion": "8.4.0-beta1",
+            "pointradius": 2,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+                {
+                    "alias": "$tag_host",
+                    "datasource": {
+                        "type": "influxdb",
+                        "uid": "ETp-mW-nz"
+                    },
+                    "groupBy": [
+                        {
+                            "params": [
+                                "$__interval"
+                            ],
+                            "type": "time"
+                        },
+                        {
+                            "params": [
+                                "host"
+                            ],
+                            "type": "tag"
+                        },
+                        {
+                            "params": [
+                                "linear"
+                            ],
+                            "type": "fill"
+                        }
+                    ],
+                    "measurement": "win_disk",
+                    "orderByTime": "ASC",
+                    "policy": "default",
+                    "refId": "A",
+                    "resultFormat": "time_series",
+                    "select": [
+                        [
+                            {
+                                "params": [
+                                    "Free_Megabytes"
+                                ],
+                                "type": "field"
+                            },
+                            {
+                                "params": [],
+                                "type": "mean"
+                            }
+                        ]
+                    ],
+                    "tags": [
+                        {
+                            "key": "host",
+                            "operator": "=",
+                            "value": "openwebinars-dev"
+                        },
+                        {
+                            "condition": "AND",
+                            "key": "customer",
+                            "operator": "=",
+                            "value": "OpenWebinars"
+                        },
+                        {
+                            "condition": "AND",
+                            "key": "os",
+                            "operator": "=",
+                            "value": "Windows"
+                        }
+                    ]
+                }
+            ],
+            "thresholds": [
+                {
+                    "colorMode": "critical",
+                    "fill": true,
+                    "line": true,
+                    "op": "lt",
+                    "value": 10000,
+                    "visible": true
+                }
+            ],
+            "timeRegions": [],
+            "title": "Disk",
+            "tooltip": {
+                "shared": true,
+                "sort": 0,
+                "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+                "mode": "time",
+                "show": true,
+                "values": []
+            },
+            "yaxes": [
+                {
+                    "$$hashKey": "object:132",
+                    "format": "decmbytes",
+                    "label": "",
+                    "logBase": 1,
+                    "max": "130000",
+                    "min": "0",
+                    "show": true
+                },
+                {
+                    "$$hashKey": "object:133",
+                    "format": "linear",
+                    "label": "",
+                    "logBase": 1,
+                    "show": true
+                }
+            ],
+            "yaxis": {
+                "align": false
+            }
+        }
+    ],
+    "refresh": "",
+    "schemaVersion": 35,
+    "style": "dark",
+    "tags": [],
+    "templating": {
+        "list": []
+    },
+    "time": {
+        "from": "now-6h",
+        "to": "now"
+    },
+    "timepicker": {},
+    "timezone": "",
+    "title": "First dashboard",
+    "uid": "0D88mZa7k",
+    "version": 41,
+    "weekStart": ""
+}
