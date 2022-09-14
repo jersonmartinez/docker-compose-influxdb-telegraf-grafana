@@ -3,7 +3,7 @@ This is a docker compose to create containers about InfluxDB, Telegraf and Grafa
 
 ### Infrastructure model
 
-![Infrastructure model](.infragenie/infrastructure_model.png)
+![imagen](https://user-images.githubusercontent.com/7296281/190256548-370ceccd-b5a2-47e2-86ef-de0c3b3fe299.png)
 
 Apply:
 
