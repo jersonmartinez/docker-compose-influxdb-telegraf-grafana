@@ -1,4 +1,4 @@
-# docker-compose-influxdb-telegraf-grafana
+# Monitoring with Docker Compose using InfluxDB, Telegraf and Grafana
 This is a docker compose to create containers about InfluxDB, Telegraf and Grafana.
 
 ### Infrastructure model
