@@ -16,3 +16,5 @@ cd docker-compose-influxdb-telegraf-grafana
 ```bash
 docker-compose up -d
 ```
+
+![image](https://github.com/user-attachments/assets/83421ba9-6f86-4539-877d-92a2ff9ac4ff)
