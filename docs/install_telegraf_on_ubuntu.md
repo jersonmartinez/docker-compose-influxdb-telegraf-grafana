@@ -163,28 +163,31 @@ Ya con esto hemos verificado que está recolectando y enviando datos a Influx. Y
 Monitorizar Ubuntu: 
 - Si hay algún inconveniente con.
 
-![[Pasted image 20240808225341.png]]
+![Pasted image 20240808225341](https://github.com/user-attachments/assets/d58eef4e-d7dc-45e1-9d31-d9b1c6b1e583)
+
 #### CPU:
 Standard options -> Percent (0 - 100), Min: 0, Max: 100
 Thresholds -> 80 (Red), 60 (Yellow).
 ```sql
 SELECT mean("usage_guest") FROM "cpu" WHERE ("host" = 'Ubuntu' AND "customer" = 'DevOpsea' AND "os" = 'Linux' AND "environment" = 'Dev') AND $timeFilter GROUP BY time($__interval), "host" fill(linear)
 ```
-![[Pasted image 20240808225513.png]]
+![Pasted image 20240808225513](https://github.com/user-attachments/assets/9d9e5722-ee4e-40ea-9020-e6b1f1d350ac)
+
 #### MEMORY:
 Standard options -> bytes(SI), Min: 0, Max: 12000000000
 Thresholds -> 2000000000 (Red).
 ```sql
 SELECT "available" FROM "mem" WHERE ("host" = 'Ubuntu' AND "customer" = 'DevOpsea' AND "os" = 'Linux' AND "environment" = 'Dev') AND $timeFilter GROUP BY "host"
 ```
-![[Pasted image 20240808225817.png]]
+![Pasted image 20240808225817](https://github.com/user-attachments/assets/5d8b3073-9038-433d-8e5f-47ddd1f3ad35)
+
 #### DISK:
 Standard options -> bytes(SI), Min: 0, Max: 40000000000
 Thresholds -> 5000000000 (Red).
 ```sql
 SELECT "free" FROM "disk" WHERE ("host" = 'Ubuntu' AND "customer" = 'DevOpsea' AND "os" = 'Linux' AND "environment" = 'Dev' AND "path" = '/') AND $timeFilter GROUP BY "host"::tag
 ```
-![[Pasted image 20240808230032.png]]
+![Pasted image 20240808230032](https://github.com/user-attachments/assets/afb44d5d-d931-4ace-aa05-6890ef5e59e6)
 
 ### Solución de Problemas
 
