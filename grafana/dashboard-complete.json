@@ -1,0 +1,2920 @@
+{
+    "annotations": {
+        "list": [
+            {
+                "builtIn": 1,
+                "datasource": {
+                    "type": "datasource",
+                    "uid": "grafana"
+                },
+                "enable": true,
+                "hide": true,
+                "iconColor": "rgba(0, 211, 255, 1)",
+                "name": "Annotations & Alerts",
+                "target": {
+                    "limit": 100,
+                    "matchAny": false,
+                    "tags": [],
+                    "type": "dashboard"
+                },
+                "type": "dashboard"
+            }
+        ]
+    },
+    "editable": true,
+    "fiscalYearStartMonth": 0,
+    "graphTooltip": 0,
+    "id": 1,
+    "links": [],
+    "liveNow": false,
+    "panels": [
+        {
+            "collapsed": false,
+            "datasource": {
+                "type": "influxdb",
+                "uid": "ddsr98u88mygwb"
+            },
+            "gridPos": {
+                "h": 1,
+                "w": 24,
+                "x": 0,
+                "y": 0
+            },
+            "id": 19,
+            "panels": [],
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "influxdb",
+                        "uid": "ddsr98u88mygwb"
+                    },
+                    "refId": "A"
+                }
+            ],
+            "title": "Docker Containers | Telegraf",
+            "type": "row"
+        },
+        {
+            "alert": {
+                "alertRuleTags": {},
+                "conditions": [
+                    {
+                        "evaluator": {
+                            "params": [
+                                80
+                            ],
+                            "type": "gt"
+                        },
+                        "operator": {
+                            "type": "and"
+                        },
+                        "query": {
+                            "params": [
+                                "A",
+                                "5m",
+                                "now"
+                            ]
+                        },
+                        "reducer": {
+                            "params": [],
+                            "type": "avg"
+                        },
+                        "type": "query"
+                    }
+                ],
+                "executionErrorState": "alerting",
+                "for": "5m",
+                "frequency": "1m",
+                "handler": 1,
+                "name": "CPU alert",
+                "noDataState": "no_data",
+                "notifications": []
+            },
+            "datasource": {
+                "type": "influxdb",
+                "uid": "adu8m69nh8phcc"
+            },
+            "description": "",
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "palette-classic"
+                    },
+                    "custom": {
+                        "axisBorderShow": false,
+                        "axisCenteredZero": false,
+                        "axisColorMode": "text",
+                        "axisLabel": "",
+                        "axisPlacement": "auto",
+                        "barAlignment": 0,
+                        "drawStyle": "line",
+                        "fillOpacity": 10,
+                        "gradientMode": "none",
+                        "hideFrom": {
+                            "legend": false,
+                            "tooltip": false,
+                            "viz": false
+                        },
+                        "insertNulls": false,
+                        "lineInterpolation": "linear",
+                        "lineWidth": 1,
+                        "pointSize": 5,
+                        "scaleDistribution": {
+                            "type": "linear"
+                        },
+                        "showPoints": "never",
+                        "spanNulls": false,
+                        "stacking": {
+                            "group": "A",
+                            "mode": "none"
+                        },
+                        "thresholdsStyle": {
+                            "mode": "line+area"
+                        }
+                    },
+                    "mappings": [],
+                    "max": 100,
+                    "min": 0,
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "transparent",
+                                "value": null
+                            },
+                            {
+                                "color": "red",
+                                "value": 80
+                            }
+                        ]
+                    },
+                    "unit": "percent"
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 5,
+                "w": 4,
+                "x": 0,
+                "y": 1
+            },
+            "id": 2,
+            "options": {
+                "legend": {
+                    "calcs": [
+                        "mean",
+                        "max",
+                        "min"
+                    ],
+                    "displayMode": "table",
+                    "placement": "bottom",
+                    "showLegend": true
+                },
+                "tooltip": {
+                    "mode": "multi",
+                    "sort": "none"
+                }
+            },
+            "pluginVersion": "8.4.0-beta1",
+            "targets": [
+                {
+                    "alias": "$tag_host",
+                    "datasource": {
+                        "type": "influxdb",
+                        "uid": "ETp-mW-nz"
+                    },
+                    "groupBy": [
+                        {
+                            "params": [
+                                "$__interval"
+                            ],
+                            "type": "time"
+                        },
+                        {
+                            "params": [
+                                "host::tag"
+                            ],
+                            "type": "tag"
+                        },
+                        {
+                            "params": [
+                                "linear"
+                            ],
+                            "type": "fill"
+                        }
+                    ],
+                    "measurement": "cpu",
+                    "orderByTime": "ASC",
+                    "policy": "default",
+                    "query": "SELECT mean(\"usage_guest\") FROM \"cpu\" WHERE (\"host\" = 'docker-telegraf' AND \"customer\" = 'OpenWebinars' AND \"os\" = 'Linux' AND \"environment\" = 'Dev') AND $timeFilter GROUP BY time($__interval) fill(linear)",
+                    "rawQuery": false,
+                    "refId": "A",
+                    "resultFormat": "time_series",
+                    "select": [
+                        [
+                            {
+                                "params": [
+                                    "usage_guest"
+                                ],
+                                "type": "field"
+                            },
+                            {
+                                "params": [],
+                                "type": "mean"
+                            }
+                        ]
+                    ],
+                    "tags": [
+                        {
+                            "key": "host",
+                            "operator": "=",
+                            "value": "docker-telegraf"
+                        },
+                        {
+                            "condition": "AND",
+                            "key": "customer",
+                            "operator": "=",
+                            "value": "DevOpsea"
+                        },
+                        {
+                            "condition": "AND",
+                            "key": "os",
+                            "operator": "=",
+                            "value": "Linux"
+                        },
+                        {
+                            "condition": "AND",
+                            "key": "environment",
+                            "operator": "=",
+                            "value": "Dev"
+                        }
+                    ]
+                }
+            ],
+            "title": "CPU",
+            "type": "timeseries"
+        },
+        {
+            "alert": {
+                "alertRuleTags": {},
+                "conditions": [
+                    {
+                        "evaluator": {
+                            "params": [
+                                253999999
+                            ],
+                            "type": "lt"
+                        },
+                        "operator": {
+                            "type": "and"
+                        },
+                        "query": {
+                            "params": [
+                                "A",
+                                "5m",
+                                "now"
+                            ]
+                        },
+                        "reducer": {
+                            "params": [],
+                            "type": "avg"
+                        },
+                        "type": "query"
+                    }
+                ],
+                "executionErrorState": "alerting",
+                "for": "5m",
+                "frequency": "1m",
+                "handler": 1,
+                "name": "Memory alert",
+                "noDataState": "no_data",
+                "notifications": []
+            },
+            "datasource": {
+                "type": "influxdb",
+                "uid": "adu8m69nh8phcc"
+            },
+            "description": "",
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "palette-classic"
+                    },
+                    "custom": {
+                        "axisBorderShow": false,
+                        "axisCenteredZero": false,
+                        "axisColorMode": "text",
+                        "axisLabel": "",
+                        "axisPlacement": "auto",
+                        "barAlignment": 0,
+                        "drawStyle": "line",
+                        "fillOpacity": 10,
+                        "gradientMode": "none",
+                        "hideFrom": {
+                            "legend": false,
+                            "tooltip": false,
+                            "viz": false
+                        },
+                        "insertNulls": false,
+                        "lineInterpolation": "linear",
+                        "lineWidth": 1,
+                        "pointSize": 5,
+                        "scaleDistribution": {
+                            "type": "linear"
+                        },
+                        "showPoints": "never",
+                        "spanNulls": false,
+                        "stacking": {
+                            "group": "A",
+                            "mode": "none"
+                        },
+                        "thresholdsStyle": {
+                            "mode": "line+area"
+                        }
+                    },
+                    "mappings": [],
+                    "max": 4589934592,
+                    "min": 0,
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "red",
+                                "value": null
+                            },
+                            {
+                                "color": "transparent",
+                                "value": 253999999
+                            }
+                        ]
+                    },
+                    "unit": "decbytes"
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 5,
+                "w": 4,
+                "x": 4,
+                "y": 1
+            },
+            "id": 5,
+            "options": {
+                "legend": {
+                    "calcs": [
+                        "mean",
+                        "max",
+                        "min"
+                    ],
+                    "displayMode": "table",
+                    "placement": "bottom",
+                    "showLegend": true
+                },
+                "tooltip": {
+                    "mode": "multi",
+                    "sort": "none"
+                }
+            },
+            "pluginVersion": "8.4.0-beta1",
+            "targets": [
+                {
+                    "alias": "$tag_host",
+                    "datasource": {
+                        "type": "influxdb",
+                        "uid": "ETp-mW-nz"
+                    },
+                    "groupBy": [
+                        {
+                            "params": [
+                                "$__interval"
+                            ],
+                            "type": "time"
+                        },
+                        {
+                            "params": [
+                                "host::tag"
+                            ],
+                            "type": "tag"
+                        },
+                        {
+                            "params": [
+                                "linear"
+                            ],
+                            "type": "fill"
+                        }
+                    ],
+                    "measurement": "cpu",
+                    "orderByTime": "ASC",
+                    "policy": "default",
+                    "query": "SELECT mean(\"usage_guest\") FROM \"cpu\" WHERE (\"host\" = 'docker-telegraf' AND \"customer\" = 'OpenWebinars' AND \"os\" = 'Linux' AND \"environment\" = 'Dev') AND $timeFilter GROUP BY time($__interval) fill(linear)",
+                    "rawQuery": false,
+                    "refId": "A",
+                    "resultFormat": "time_series",
+                    "select": [
+                        [
+                            {
+                                "params": [
+                                    "usage_guest"
+                                ],
+                                "type": "field"
+                            },
+                            {
+                                "params": [],
+                                "type": "count"
+                            }
+                        ]
+                    ],
+                    "tags": [
+                        {
+                            "key": "host",
+                            "operator": "=",
+                            "value": "docker-telegraf"
+                        },
+                        {
+                            "condition": "AND",
+                            "key": "customer",
+                            "operator": "=",
+                            "value": "DevOpsea"
+                        },
+                        {
+                            "condition": "AND",
+                            "key": "os",
+                            "operator": "=",
+                            "value": "Linux"
+                        },
+                        {
+                            "condition": "AND",
+                            "key": "environment",
+                            "operator": "=",
+                            "value": "Dev"
+                        }
+                    ]
+                }
+            ],
+            "title": "Memory",
+            "type": "timeseries"
+        },
+        {
+            "alert": {
+                "alertRuleTags": {},
+                "conditions": [
+                    {
+                        "evaluator": {
+                            "params": [
+                                1000
+                            ],
+                            "type": "lt"
+                        },
+                        "operator": {
+                            "type": "and"
+                        },
+                        "query": {
+                            "params": [
+                                "A",
+                                "5m",
+                                "now"
+                            ]
+                        },
+                        "reducer": {
+                            "params": [],
+                            "type": "avg"
+                        },
+                        "type": "query"
+                    }
+                ],
+                "executionErrorState": "alerting",
+                "for": "5m",
+                "frequency": "1m",
+                "handler": 1,
+                "name": "Disk alert",
+                "noDataState": "no_data",
+                "notifications": []
+            },
+            "datasource": {
+                "type": "influxdb",
+                "uid": "adu8m69nh8phcc"
+            },
+            "description": "",
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "palette-classic"
+                    },
+                    "custom": {
+                        "axisBorderShow": false,
+                        "axisCenteredZero": false,
+                        "axisColorMode": "text",
+                        "axisLabel": "",
+                        "axisPlacement": "auto",
+                        "barAlignment": 0,
+                        "drawStyle": "line",
+                        "fillOpacity": 10,
+                        "gradientMode": "none",
+                        "hideFrom": {
+                            "legend": false,
+                            "tooltip": false,
+                            "viz": false
+                        },
+                        "insertNulls": false,
+                        "lineInterpolation": "linear",
+                        "lineWidth": 1,
+                        "pointSize": 5,
+                        "scaleDistribution": {
+                            "type": "linear"
+                        },
+                        "showPoints": "never",
+                        "spanNulls": false,
+                        "stacking": {
+                            "group": "A",
+                            "mode": "none"
+                        },
+                        "thresholdsStyle": {
+                            "mode": "line+area"
+                        }
+                    },
+                    "mappings": [],
+                    "max": 8000,
+                    "min": 0,
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "red",
+                                "value": null
+                            },
+                            {
+                                "color": "transparent",
+                                "value": 1000
+                            }
+                        ]
+                    },
+                    "unit": "decmbytes"
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 5,
+                "w": 4,
+                "x": 8,
+                "y": 1
+            },
+            "id": 12,
+            "options": {
+                "legend": {
+                    "calcs": [
+                        "mean",
+                        "max",
+                        "min"
+                    ],
+                    "displayMode": "table",
+                    "placement": "bottom",
+                    "showLegend": true
+                },
+                "tooltip": {
+                    "mode": "multi",
+                    "sort": "none"
+                }
+            },
+            "pluginVersion": "8.4.0-beta1",
+            "targets": [
+                {
+                    "alias": "$tag_host",
+                    "datasource": {
+                        "type": "influxdb",
+                        "uid": "ETp-mW-nz"
+                    },
+                    "groupBy": [
+                        {
+                            "params": [
+                                "$__interval"
+                            ],
+                            "type": "time"
+                        },
+                        {
+                            "params": [
+                                "host::tag"
+                            ],
+                            "type": "tag"
+                        },
+                        {
+                            "params": [
+                                "null"
+                            ],
+                            "type": "fill"
+                        }
+                    ],
+                    "measurement": "disk",
+                    "orderByTime": "ASC",
+                    "policy": "default",
+                    "query": "SELECT mean(\"usage_guest\") FROM \"cpu\" WHERE (\"host\" = 'docker-telegraf' AND \"customer\" = 'OpenWebinars' AND \"os\" = 'Linux' AND \"environment\" = 'Dev') AND $timeFilter GROUP BY time($__interval) fill(linear)",
+                    "rawQuery": false,
+                    "refId": "A",
+                    "resultFormat": "time_series",
+                    "select": [
+                        [
+                            {
+                                "params": [
+                                    "free"
+                                ],
+                                "type": "field"
+                            },
+                            {
+                                "params": [],
+                                "type": "count"
+                            }
+                        ]
+                    ],
+                    "tags": [
+                        {
+                            "key": "host",
+                            "operator": "=",
+                            "value": "docker-telegraf"
+                        },
+                        {
+                            "condition": "AND",
+                            "key": "customer",
+                            "operator": "=",
+                            "value": "DevOpsea"
+                        },
+                        {
+                            "condition": "AND",
+                            "key": "os",
+                            "operator": "=",
+                            "value": "Linux"
+                        },
+                        {
+                            "condition": "AND",
+                            "key": "environment",
+                            "operator": "=",
+                            "value": "Dev"
+                        }
+                    ]
+                }
+            ],
+            "title": "Disk",
+            "type": "timeseries"
+        },
+        {
+            "datasource": {
+                "type": "influxdb",
+                "uid": "adu8m69nh8phcc"
+            },
+            "description": "",
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "palette-classic"
+                    },
+                    "custom": {
+                        "axisBorderShow": false,
+                        "axisCenteredZero": false,
+                        "axisColorMode": "text",
+                        "axisLabel": "",
+                        "axisPlacement": "auto",
+                        "barAlignment": 0,
+                        "drawStyle": "line",
+                        "fillOpacity": 10,
+                        "gradientMode": "none",
+                        "hideFrom": {
+                            "legend": false,
+                            "tooltip": false,
+                            "viz": false
+                        },
+                        "insertNulls": false,
+                        "lineInterpolation": "linear",
+                        "lineWidth": 1,
+                        "pointSize": 5,
+                        "scaleDistribution": {
+                            "type": "linear"
+                        },
+                        "showPoints": "never",
+                        "spanNulls": false,
+                        "stacking": {
+                            "group": "A",
+                            "mode": "none"
+                        },
+                        "thresholdsStyle": {
+                            "mode": "off"
+                        }
+                    },
+                    "mappings": [],
+                    "max": 100,
+                    "min": 0,
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            },
+                            {
+                                "color": "red",
+                                "value": 80
+                            }
+                        ]
+                    },
+                    "unit": "percent"
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 5,
+                "w": 4,
+                "x": 12,
+                "y": 1
+            },
+            "id": 20,
+            "options": {
+                "legend": {
+                    "calcs": [
+                        "mean",
+                        "max",
+                        "min"
+                    ],
+                    "displayMode": "table",
+                    "placement": "bottom",
+                    "showLegend": true
+                },
+                "tooltip": {
+                    "mode": "multi",
+                    "sort": "none"
+                }
+            },
+            "pluginVersion": "8.4.0-beta1",
+            "targets": [
+                {
+                    "alias": "$tag_host",
+                    "datasource": {
+                        "type": "influxdb",
+                        "uid": "ETp-mW-nz"
+                    },
+                    "groupBy": [
+                        {
+                            "params": [
+                                "$__interval"
+                            ],
+                            "type": "time"
+                        },
+                        {
+                            "params": [
+                                "host::tag"
+                            ],
+                            "type": "tag"
+                        },
+                        {
+                            "params": [
+                                "linear"
+                            ],
+                            "type": "fill"
+                        }
+                    ],
+                    "measurement": "cpu",
+                    "orderByTime": "ASC",
+                    "policy": "default",
+                    "query": "SELECT mean(\"usage_guest\") FROM \"cpu\" WHERE (\"host\" = 'docker-telegraf' AND \"customer\" = 'OpenWebinars' AND \"os\" = 'Linux' AND \"environment\" = 'Dev') AND $timeFilter GROUP BY time($__interval) fill(linear)",
+                    "rawQuery": false,
+                    "refId": "A",
+                    "resultFormat": "time_series",
+                    "select": [
+                        [
+                            {
+                                "params": [
+                                    "usage_guest"
+                                ],
+                                "type": "field"
+                            },
+                            {
+                                "params": [],
+                                "type": "mean"
+                            }
+                        ]
+                    ],
+                    "tags": [
+                        {
+                            "key": "host",
+                            "operator": "=",
+                            "value": "docker-telegraf-second"
+                        },
+                        {
+                            "condition": "AND",
+                            "key": "customer",
+                            "operator": "=",
+                            "value": "DevOpsea"
+                        },
+                        {
+                            "condition": "AND",
+                            "key": "os",
+                            "operator": "=",
+                            "value": "Linux"
+                        },
+                        {
+                            "condition": "AND",
+                            "key": "environment",
+                            "operator": "=",
+                            "value": "Dev"
+                        }
+                    ]
+                }
+            ],
+            "title": "CPU",
+            "type": "timeseries"
+        },
+        {
+            "datasource": {
+                "type": "influxdb",
+                "uid": "adu8m69nh8phcc"
+            },
+            "description": "",
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "palette-classic"
+                    },
+                    "custom": {
+                        "axisBorderShow": false,
+                        "axisCenteredZero": false,
+                        "axisColorMode": "text",
+                        "axisLabel": "",
+                        "axisPlacement": "auto",
+                        "barAlignment": 0,
+                        "drawStyle": "line",
+                        "fillOpacity": 10,
+                        "gradientMode": "none",
+                        "hideFrom": {
+                            "legend": false,
+                            "tooltip": false,
+                            "viz": false
+                        },
+                        "insertNulls": false,
+                        "lineInterpolation": "linear",
+                        "lineWidth": 1,
+                        "pointSize": 5,
+                        "scaleDistribution": {
+                            "type": "linear"
+                        },
+                        "showPoints": "never",
+                        "spanNulls": false,
+                        "stacking": {
+                            "group": "A",
+                            "mode": "none"
+                        },
+                        "thresholdsStyle": {
+                            "mode": "off"
+                        }
+                    },
+                    "mappings": [],
+                    "max": 4589934592,
+                    "min": 0,
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            },
+                            {
+                                "color": "red",
+                                "value": 80
+                            }
+                        ]
+                    },
+                    "unit": "decbytes"
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 5,
+                "w": 4,
+                "x": 16,
+                "y": 1
+            },
+            "id": 21,
+            "options": {
+                "legend": {
+                    "calcs": [
+                        "mean",
+                        "max",
+                        "min"
+                    ],
+                    "displayMode": "table",
+                    "placement": "bottom",
+                    "showLegend": true
+                },
+                "tooltip": {
+                    "mode": "multi",
+                    "sort": "none"
+                }
+            },
+            "pluginVersion": "8.4.0-beta1",
+            "targets": [
+                {
+                    "alias": "$tag_host",
+                    "datasource": {
+                        "type": "influxdb",
+                        "uid": "ETp-mW-nz"
+                    },
+                    "groupBy": [
+                        {
+                            "params": [
+                                "$__interval"
+                            ],
+                            "type": "time"
+                        },
+                        {
+                            "params": [
+                                "host::tag"
+                            ],
+                            "type": "tag"
+                        },
+                        {
+                            "params": [
+                                "linear"
+                            ],
+                            "type": "fill"
+                        }
+                    ],
+                    "measurement": "cpu",
+                    "orderByTime": "ASC",
+                    "policy": "default",
+                    "query": "SELECT mean(\"usage_guest\") FROM \"cpu\" WHERE (\"host\" = 'docker-telegraf' AND \"customer\" = 'OpenWebinars' AND \"os\" = 'Linux' AND \"environment\" = 'Dev') AND $timeFilter GROUP BY time($__interval) fill(linear)",
+                    "rawQuery": false,
+                    "refId": "A",
+                    "resultFormat": "time_series",
+                    "select": [
+                        [
+                            {
+                                "params": [
+                                    "usage_guest"
+                                ],
+                                "type": "field"
+                            },
+                            {
+                                "params": [],
+                                "type": "mean"
+                            }
+                        ]
+                    ],
+                    "tags": [
+                        {
+                            "key": "host",
+                            "operator": "=",
+                            "value": "docker-telegraf-second"
+                        },
+                        {
+                            "condition": "AND",
+                            "key": "customer",
+                            "operator": "=",
+                            "value": "DevOpsea"
+                        },
+                        {
+                            "condition": "AND",
+                            "key": "os",
+                            "operator": "=",
+                            "value": "Linux"
+                        },
+                        {
+                            "condition": "AND",
+                            "key": "environment",
+                            "operator": "=",
+                            "value": "Dev"
+                        }
+                    ]
+                }
+            ],
+            "title": "Memory",
+            "type": "timeseries"
+        },
+        {
+            "datasource": {
+                "type": "influxdb",
+                "uid": "adu8m69nh8phcc"
+            },
+            "description": "",
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "palette-classic"
+                    },
+                    "custom": {
+                        "axisBorderShow": false,
+                        "axisCenteredZero": false,
+                        "axisColorMode": "text",
+                        "axisLabel": "",
+                        "axisPlacement": "auto",
+                        "barAlignment": 0,
+                        "drawStyle": "line",
+                        "fillOpacity": 10,
+                        "gradientMode": "none",
+                        "hideFrom": {
+                            "legend": false,
+                            "tooltip": false,
+                            "viz": false
+                        },
+                        "insertNulls": false,
+                        "lineInterpolation": "linear",
+                        "lineWidth": 1,
+                        "pointSize": 5,
+                        "scaleDistribution": {
+                            "type": "linear"
+                        },
+                        "showPoints": "never",
+                        "spanNulls": false,
+                        "stacking": {
+                            "group": "A",
+                            "mode": "none"
+                        },
+                        "thresholdsStyle": {
+                            "mode": "off"
+                        }
+                    },
+                    "mappings": [],
+                    "max": 8000,
+                    "min": 0,
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            },
+                            {
+                                "color": "red",
+                                "value": 80
+                            }
+                        ]
+                    },
+                    "unit": "decmbytes"
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 5,
+                "w": 4,
+                "x": 20,
+                "y": 1
+            },
+            "id": 22,
+            "options": {
+                "legend": {
+                    "calcs": [
+                        "mean",
+                        "max",
+                        "min"
+                    ],
+                    "displayMode": "table",
+                    "placement": "bottom",
+                    "showLegend": true
+                },
+                "tooltip": {
+                    "mode": "multi",
+                    "sort": "none"
+                }
+            },
+            "pluginVersion": "8.4.0-beta1",
+            "targets": [
+                {
+                    "alias": "$tag_host",
+                    "datasource": {
+                        "type": "influxdb",
+                        "uid": "ETp-mW-nz"
+                    },
+                    "groupBy": [
+                        {
+                            "params": [
+                                "$__interval"
+                            ],
+                            "type": "time"
+                        },
+                        {
+                            "params": [
+                                "host::tag"
+                            ],
+                            "type": "tag"
+                        },
+                        {
+                            "params": [
+                                "linear"
+                            ],
+                            "type": "fill"
+                        }
+                    ],
+                    "measurement": "disk",
+                    "orderByTime": "ASC",
+                    "policy": "default",
+                    "query": "SELECT mean(\"usage_guest\") FROM \"cpu\" WHERE (\"host\" = 'docker-telegraf' AND \"customer\" = 'OpenWebinars' AND \"os\" = 'Linux' AND \"environment\" = 'Dev') AND $timeFilter GROUP BY time($__interval) fill(linear)",
+                    "rawQuery": false,
+                    "refId": "A",
+                    "resultFormat": "time_series",
+                    "select": [
+                        [
+                            {
+                                "params": [
+                                    "free"
+                                ],
+                                "type": "field"
+                            },
+                            {
+                                "params": [],
+                                "type": "count"
+                            }
+                        ]
+                    ],
+                    "tags": [
+                        {
+                            "key": "host",
+                            "operator": "=",
+                            "value": "docker-telegraf-second"
+                        },
+                        {
+                            "condition": "AND",
+                            "key": "customer",
+                            "operator": "=",
+                            "value": "DevOpsea"
+                        },
+                        {
+                            "condition": "AND",
+                            "key": "os",
+                            "operator": "=",
+                            "value": "Linux"
+                        },
+                        {
+                            "condition": "AND",
+                            "key": "environment",
+                            "operator": "=",
+                            "value": "Dev"
+                        }
+                    ]
+                }
+            ],
+            "title": "Disk",
+            "type": "timeseries"
+        },
+        {
+            "collapsed": false,
+            "datasource": {
+                "type": "influxdb",
+                "uid": "ddsr98u88mygwb"
+            },
+            "gridPos": {
+                "h": 1,
+                "w": 24,
+                "x": 0,
+                "y": 6
+            },
+            "id": 14,
+            "panels": [],
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "influxdb",
+                        "uid": "ddsr98u88mygwb"
+                    },
+                    "refId": "A"
+                }
+            ],
+            "title": "WSL - Debian",
+            "type": "row"
+        },
+        {
+            "alert": {
+                "alertRuleTags": {},
+                "conditions": [
+                    {
+                        "evaluator": {
+                            "params": [
+                                80
+                            ],
+                            "type": "gt"
+                        },
+                        "operator": {
+                            "type": "and"
+                        },
+                        "query": {
+                            "params": [
+                                "A",
+                                "5m",
+                                "now"
+                            ]
+                        },
+                        "reducer": {
+                            "params": [],
+                            "type": "avg"
+                        },
+                        "type": "query"
+                    }
+                ],
+                "executionErrorState": "alerting",
+                "for": "5m",
+                "frequency": "1m",
+                "handler": 1,
+                "name": "CPU alert",
+                "noDataState": "no_data",
+                "notifications": []
+            },
+            "datasource": {
+                "type": "influxdb",
+                "uid": "adu8m69nh8phcc"
+            },
+            "description": "",
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "palette-classic"
+                    },
+                    "custom": {
+                        "axisBorderShow": true,
+                        "axisCenteredZero": false,
+                        "axisColorMode": "series",
+                        "axisGridShow": true,
+                        "axisLabel": "Porcentage",
+                        "axisPlacement": "left",
+                        "barAlignment": 0,
+                        "drawStyle": "line",
+                        "fillOpacity": 26,
+                        "gradientMode": "opacity",
+                        "hideFrom": {
+                            "legend": false,
+                            "tooltip": false,
+                            "viz": false
+                        },
+                        "insertNulls": false,
+                        "lineInterpolation": "linear",
+                        "lineStyle": {
+                            "fill": "solid"
+                        },
+                        "lineWidth": 2,
+                        "pointSize": 10,
+                        "scaleDistribution": {
+                            "type": "linear"
+                        },
+                        "showPoints": "never",
+                        "spanNulls": false,
+                        "stacking": {
+                            "group": "A",
+                            "mode": "none"
+                        },
+                        "thresholdsStyle": {
+                            "mode": "line+area"
+                        }
+                    },
+                    "mappings": [],
+                    "max": 100,
+                    "min": 0,
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "transparent",
+                                "value": null
+                            },
+                            {
+                                "color": "#EAB839",
+                                "value": 60
+                            },
+                            {
+                                "color": "red",
+                                "value": 80
+                            }
+                        ]
+                    },
+                    "unit": "percent"
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 9,
+                "w": 8,
+                "x": 0,
+                "y": 7
+            },
+            "id": 15,
+            "options": {
+                "legend": {
+                    "calcs": [
+                        "min",
+                        "max",
+                        "lastNotNull"
+                    ],
+                    "displayMode": "table",
+                    "placement": "bottom",
+                    "showLegend": true
+                },
+                "tooltip": {
+                    "hoverProximity": 1,
+                    "mode": "multi",
+                    "sort": "none"
+                }
+            },
+            "pluginVersion": "8.4.0-beta1",
+            "targets": [
+                {
+                    "alias": "$tag_host",
+                    "datasource": {
+                        "type": "influxdb",
+                        "uid": "ETp-mW-nz"
+                    },
+                    "groupBy": [
+                        {
+                            "params": [
+                                "$__interval"
+                            ],
+                            "type": "time"
+                        },
+                        {
+                            "params": [
+                                "host"
+                            ],
+                            "type": "tag"
+                        },
+                        {
+                            "params": [
+                                "linear"
+                            ],
+                            "type": "fill"
+                        }
+                    ],
+                    "measurement": "cpu",
+                    "orderByTime": "ASC",
+                    "policy": "default",
+                    "refId": "A",
+                    "resultFormat": "time_series",
+                    "select": [
+                        [
+                            {
+                                "params": [
+                                    "usage_guest"
+                                ],
+                                "type": "field"
+                            },
+                            {
+                                "params": [],
+                                "type": "mean"
+                            }
+                        ]
+                    ],
+                    "tags": [
+                        {
+                            "key": "host",
+                            "operator": "=",
+                            "value": "WSL-debian"
+                        },
+                        {
+                            "condition": "AND",
+                            "key": "customer",
+                            "operator": "=",
+                            "value": "DevOpsea"
+                        },
+                        {
+                            "condition": "AND",
+                            "key": "os",
+                            "operator": "=",
+                            "value": "Linux"
+                        },
+                        {
+                            "condition": "AND",
+                            "key": "environment",
+                            "operator": "=",
+                            "value": "Dev"
+                        }
+                    ]
+                }
+            ],
+            "title": "CPU",
+            "type": "timeseries"
+        },
+        {
+            "alert": {
+                "alertRuleTags": {},
+                "conditions": [
+                    {
+                        "evaluator": {
+                            "params": [
+                                10050000000
+                            ],
+                            "type": "lt"
+                        },
+                        "operator": {
+                            "type": "and"
+                        },
+                        "query": {
+                            "params": [
+                                "A",
+                                "5m",
+                                "now"
+                            ]
+                        },
+                        "reducer": {
+                            "params": [],
+                            "type": "avg"
+                        },
+                        "type": "query"
+                    }
+                ],
+                "executionErrorState": "alerting",
+                "for": "5m",
+                "frequency": "1m",
+                "handler": 1,
+                "name": "Memory alert",
+                "noDataState": "no_data",
+                "notifications": []
+            },
+            "datasource": {},
+            "description": "",
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "palette-classic"
+                    },
+                    "custom": {
+                        "axisBorderShow": true,
+                        "axisCenteredZero": false,
+                        "axisColorMode": "series",
+                        "axisGridShow": true,
+                        "axisLabel": "Gigabyte",
+                        "axisPlacement": "left",
+                        "barAlignment": 0,
+                        "drawStyle": "line",
+                        "fillOpacity": 40,
+                        "gradientMode": "opacity",
+                        "hideFrom": {
+                            "legend": false,
+                            "tooltip": false,
+                            "viz": false
+                        },
+                        "insertNulls": false,
+                        "lineInterpolation": "linear",
+                        "lineStyle": {
+                            "fill": "solid"
+                        },
+                        "lineWidth": 2,
+                        "pointSize": 5,
+                        "scaleDistribution": {
+                            "type": "linear"
+                        },
+                        "showPoints": "never",
+                        "spanNulls": false,
+                        "stacking": {
+                            "group": "A",
+                            "mode": "none"
+                        },
+                        "thresholdsStyle": {
+                            "mode": "line+area"
+                        }
+                    },
+                    "mappings": [],
+                    "max": 60000000000,
+                    "min": 0,
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "red",
+                                "value": null
+                            },
+                            {
+                                "color": "transparent",
+                                "value": 10000000000
+                            }
+                        ]
+                    },
+                    "unit": "decbytes"
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 9,
+                "w": 8,
+                "x": 8,
+                "y": 7
+            },
+            "id": 16,
+            "options": {
+                "legend": {
+                    "calcs": [
+                        "min",
+                        "max",
+                        "lastNotNull"
+                    ],
+                    "displayMode": "table",
+                    "placement": "bottom",
+                    "showLegend": true
+                },
+                "tooltip": {
+                    "mode": "multi",
+                    "sort": "none"
+                }
+            },
+            "pluginVersion": "8.4.0-beta1",
+            "targets": [
+                {
+                    "alias": "$tag_host",
+                    "datasource": {
+                        "type": "influxdb",
+                        "uid": "ETp-mW-nz"
+                    },
+                    "groupBy": [
+                        {
+                            "params": [
+                                "host"
+                            ],
+                            "type": "tag"
+                        }
+                    ],
+                    "measurement": "mem",
+                    "orderByTime": "ASC",
+                    "policy": "default",
+                    "query": "SELECT mean(\"Available_Bytes\") FROM \"win_mem\" WHERE (\"customer\" = 'OpenWebinars') AND $timeFilter GROUP BY time($__interval), \"host\" fill(linear)",
+                    "rawQuery": false,
+                    "refId": "A",
+                    "resultFormat": "time_series",
+                    "select": [
+                        [
+                            {
+                                "params": [
+                                    "available"
+                                ],
+                                "type": "field"
+                            }
+                        ]
+                    ],
+                    "tags": [
+                        {
+                            "key": "host",
+                            "operator": "=",
+                            "value": "WSL-debian"
+                        },
+                        {
+                            "condition": "AND",
+                            "key": "customer",
+                            "operator": "=",
+                            "value": "DevOpsea"
+                        },
+                        {
+                            "condition": "AND",
+                            "key": "os",
+                            "operator": "=",
+                            "value": "Linux"
+                        },
+                        {
+                            "condition": "AND",
+                            "key": "environment",
+                            "operator": "=",
+                            "value": "Dev"
+                        }
+                    ]
+                }
+            ],
+            "title": "Memory",
+            "type": "timeseries"
+        },
+        {
+            "alert": {
+                "alertRuleTags": {},
+                "conditions": [
+                    {
+                        "evaluator": {
+                            "params": [
+                                103400000000
+                            ],
+                            "type": "gt"
+                        },
+                        "operator": {
+                            "type": "and"
+                        },
+                        "query": {
+                            "params": [
+                                "A",
+                                "5m",
+                                "now"
+                            ]
+                        },
+                        "reducer": {
+                            "params": [],
+                            "type": "avg"
+                        },
+                        "type": "query"
+                    }
+                ],
+                "executionErrorState": "alerting",
+                "for": "5m",
+                "frequency": "1m",
+                "handler": 1,
+                "name": "Disk alert",
+                "noDataState": "no_data",
+                "notifications": []
+            },
+            "datasource": {},
+            "description": "",
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "palette-classic"
+                    },
+                    "custom": {
+                        "axisBorderShow": true,
+                        "axisCenteredZero": false,
+                        "axisColorMode": "series",
+                        "axisLabel": "Gigabyte",
+                        "axisPlacement": "auto",
+                        "barAlignment": 0,
+                        "drawStyle": "line",
+                        "fillOpacity": 40,
+                        "gradientMode": "opacity",
+                        "hideFrom": {
+                            "legend": false,
+                            "tooltip": false,
+                            "viz": false
+                        },
+                        "insertNulls": false,
+                        "lineInterpolation": "linear",
+                        "lineStyle": {
+                            "fill": "solid"
+                        },
+                        "lineWidth": 2,
+                        "pointSize": 5,
+                        "scaleDistribution": {
+                            "type": "linear"
+                        },
+                        "showPoints": "never",
+                        "spanNulls": false,
+                        "stacking": {
+                            "group": "A",
+                            "mode": "none"
+                        },
+                        "thresholdsStyle": {
+                            "mode": "line+area"
+                        }
+                    },
+                    "decimals": 0,
+                    "mappings": [],
+                    "max": 1000000000000,
+                    "min": 0,
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "dark-red",
+                                "value": null
+                            },
+                            {
+                                "color": "transparent",
+                                "value": 30000000000
+                            }
+                        ]
+                    },
+                    "unit": "decbytes"
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 9,
+                "w": 8,
+                "x": 16,
+                "y": 7
+            },
+            "id": 17,
+            "options": {
+                "legend": {
+                    "calcs": [
+                        "min",
+                        "max",
+                        "lastNotNull"
+                    ],
+                    "displayMode": "table",
+                    "placement": "bottom",
+                    "showLegend": true
+                },
+                "tooltip": {
+                    "mode": "multi",
+                    "sort": "none"
+                }
+            },
+            "pluginVersion": "8.4.0-beta1",
+            "targets": [
+                {
+                    "alias": "$tag_host",
+                    "datasource": {
+                        "type": "influxdb",
+                        "uid": "ETp-mW-nz"
+                    },
+                    "groupBy": [
+                        {
+                            "params": [
+                                "host::tag"
+                            ],
+                            "type": "tag"
+                        }
+                    ],
+                    "measurement": "disk",
+                    "orderByTime": "ASC",
+                    "policy": "default",
+                    "query": "SELECT \"free\" FROM \"disk\" WHERE (\"host\" = 'WSL-debian' AND \"customer\" = 'DevOpsea' AND \"os\" = 'Linux' AND \"environment\" = 'Dev' AND \"path\" = '/mnt/c') AND $timeFilter GROUP BY \"host\"::tag",
+                    "rawQuery": false,
+                    "refId": "A",
+                    "resultFormat": "time_series",
+                    "select": [
+                        [
+                            {
+                                "params": [
+                                    "free"
+                                ],
+                                "type": "field"
+                            }
+                        ]
+                    ],
+                    "tags": [
+                        {
+                            "key": "host",
+                            "operator": "=",
+                            "value": "WSL-debian"
+                        },
+                        {
+                            "condition": "AND",
+                            "key": "customer",
+                            "operator": "=",
+                            "value": "DevOpsea"
+                        },
+                        {
+                            "condition": "AND",
+                            "key": "os",
+                            "operator": "=",
+                            "value": "Linux"
+                        },
+                        {
+                            "condition": "AND",
+                            "key": "environment",
+                            "operator": "=",
+                            "value": "Dev"
+                        },
+                        {
+                            "condition": "AND",
+                            "key": "path",
+                            "operator": "=",
+                            "value": "/mnt/c"
+                        }
+                    ]
+                },
+                {
+                    "alias": "$tag_host",
+                    "datasource": {
+                        "type": "influxdb",
+                        "uid": "ddsr98u88mygwb"
+                    },
+                    "groupBy": [
+                        {
+                            "params": [
+                                "host::tag"
+                            ],
+                            "type": "tag"
+                        }
+                    ],
+                    "hide": false,
+                    "measurement": "disk",
+                    "orderByTime": "ASC",
+                    "policy": "default",
+                    "query": "SELECT \"free\" FROM \"disk\" WHERE (\"host\" = 'WSL-debian' AND \"customer\" = 'DevOpsea' AND \"os\" = 'Linux' AND \"environment\" = 'Dev' AND \"path\" = '/mnt/c') AND $timeFilter GROUP BY \"host\"::tag",
+                    "rawQuery": false,
+                    "refId": "B",
+                    "resultFormat": "time_series",
+                    "select": [
+                        [
+                            {
+                                "params": [
+                                    "free"
+                                ],
+                                "type": "field"
+                            }
+                        ]
+                    ],
+                    "tags": [
+                        {
+                            "key": "host",
+                            "operator": "=",
+                            "value": "WSL-debian"
+                        },
+                        {
+                            "condition": "AND",
+                            "key": "customer",
+                            "operator": "=",
+                            "value": "DevOpsea"
+                        },
+                        {
+                            "condition": "AND",
+                            "key": "os",
+                            "operator": "=",
+                            "value": "Linux"
+                        },
+                        {
+                            "condition": "AND",
+                            "key": "environment",
+                            "operator": "=",
+                            "value": "Dev"
+                        },
+                        {
+                            "condition": "AND",
+                            "key": "path",
+                            "operator": "=",
+                            "value": "/mnt/e"
+                        }
+                    ]
+                }
+            ],
+            "title": "Disk",
+            "type": "timeseries"
+        },
+        {
+            "collapsed": false,
+            "gridPos": {
+                "h": 1,
+                "w": 24,
+                "x": 0,
+                "y": 16
+            },
+            "id": 23,
+            "panels": [],
+            "title": "Ubuntu 24.04",
+            "type": "row"
+        },
+        {
+            "datasource": {
+                "type": "influxdb",
+                "uid": "adu8m69nh8phcc"
+            },
+            "description": "",
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "palette-classic"
+                    },
+                    "custom": {
+                        "axisBorderShow": true,
+                        "axisCenteredZero": false,
+                        "axisColorMode": "series",
+                        "axisGridShow": true,
+                        "axisLabel": "Porcentage",
+                        "axisPlacement": "left",
+                        "barAlignment": 0,
+                        "drawStyle": "line",
+                        "fillOpacity": 26,
+                        "gradientMode": "opacity",
+                        "hideFrom": {
+                            "legend": false,
+                            "tooltip": false,
+                            "viz": false
+                        },
+                        "insertNulls": false,
+                        "lineInterpolation": "linear",
+                        "lineStyle": {
+                            "fill": "solid"
+                        },
+                        "lineWidth": 2,
+                        "pointSize": 10,
+                        "scaleDistribution": {
+                            "type": "linear"
+                        },
+                        "showPoints": "never",
+                        "spanNulls": false,
+                        "stacking": {
+                            "group": "A",
+                            "mode": "none"
+                        },
+                        "thresholdsStyle": {
+                            "mode": "line+area"
+                        }
+                    },
+                    "mappings": [],
+                    "max": 100,
+                    "min": 0,
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "transparent",
+                                "value": null
+                            },
+                            {
+                                "color": "#EAB839",
+                                "value": 60
+                            },
+                            {
+                                "color": "red",
+                                "value": 80
+                            }
+                        ]
+                    },
+                    "unit": "percent"
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 9,
+                "w": 8,
+                "x": 0,
+                "y": 17
+            },
+            "id": 24,
+            "options": {
+                "legend": {
+                    "calcs": [
+                        "min",
+                        "max",
+                        "lastNotNull"
+                    ],
+                    "displayMode": "table",
+                    "placement": "bottom",
+                    "showLegend": true
+                },
+                "tooltip": {
+                    "hoverProximity": 1,
+                    "mode": "multi",
+                    "sort": "none"
+                }
+            },
+            "pluginVersion": "8.4.0-beta1",
+            "targets": [
+                {
+                    "alias": "$tag_host",
+                    "datasource": {
+                        "type": "influxdb",
+                        "uid": "ETp-mW-nz"
+                    },
+                    "groupBy": [
+                        {
+                            "params": [
+                                "$__interval"
+                            ],
+                            "type": "time"
+                        },
+                        {
+                            "params": [
+                                "host"
+                            ],
+                            "type": "tag"
+                        },
+                        {
+                            "params": [
+                                "linear"
+                            ],
+                            "type": "fill"
+                        }
+                    ],
+                    "measurement": "cpu",
+                    "orderByTime": "ASC",
+                    "policy": "default",
+                    "query": "SELECT mean(\"usage_guest\") FROM \"cpu\" WHERE (\"host\" = 'Ubuntu' AND \"customer\" = 'DevOpsea' AND \"os\" = 'Linux' AND \"environment\" = 'Dev') AND $timeFilter GROUP BY time($__interval), \"host\" fill(linear)",
+                    "rawQuery": true,
+                    "refId": "A",
+                    "resultFormat": "time_series",
+                    "select": [
+                        [
+                            {
+                                "params": [
+                                    "usage_guest"
+                                ],
+                                "type": "field"
+                            },
+                            {
+                                "params": [],
+                                "type": "mean"
+                            }
+                        ]
+                    ],
+                    "tags": [
+                        {
+                            "key": "host",
+                            "operator": "=",
+                            "value": "Ubuntu"
+                        },
+                        {
+                            "condition": "AND",
+                            "key": "customer",
+                            "operator": "=",
+                            "value": "DevOpsea"
+                        },
+                        {
+                            "condition": "AND",
+                            "key": "os",
+                            "operator": "=",
+                            "value": "Linux"
+                        },
+                        {
+                            "condition": "AND",
+                            "key": "environment",
+                            "operator": "=",
+                            "value": "Dev"
+                        }
+                    ]
+                }
+            ],
+            "title": "CPU",
+            "type": "timeseries"
+        },
+        {
+            "datasource": {
+                "type": "influxdb",
+                "uid": "adu8m69nh8phcc"
+            },
+            "description": "",
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "palette-classic"
+                    },
+                    "custom": {
+                        "axisBorderShow": true,
+                        "axisCenteredZero": false,
+                        "axisColorMode": "series",
+                        "axisGridShow": true,
+                        "axisLabel": "Gigabyte",
+                        "axisPlacement": "left",
+                        "barAlignment": 0,
+                        "drawStyle": "line",
+                        "fillOpacity": 40,
+                        "gradientMode": "opacity",
+                        "hideFrom": {
+                            "legend": false,
+                            "tooltip": false,
+                            "viz": false
+                        },
+                        "insertNulls": false,
+                        "lineInterpolation": "linear",
+                        "lineStyle": {
+                            "fill": "solid"
+                        },
+                        "lineWidth": 2,
+                        "pointSize": 5,
+                        "scaleDistribution": {
+                            "type": "linear"
+                        },
+                        "showPoints": "never",
+                        "spanNulls": false,
+                        "stacking": {
+                            "group": "A",
+                            "mode": "none"
+                        },
+                        "thresholdsStyle": {
+                            "mode": "line+area"
+                        }
+                    },
+                    "mappings": [],
+                    "max": 12000000000,
+                    "min": 0,
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "red",
+                                "value": null
+                            },
+                            {
+                                "color": "transparent",
+                                "value": 2000000000
+                            }
+                        ]
+                    },
+                    "unit": "decbytes"
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 9,
+                "w": 8,
+                "x": 8,
+                "y": 17
+            },
+            "id": 25,
+            "options": {
+                "legend": {
+                    "calcs": [
+                        "min",
+                        "max",
+                        "lastNotNull"
+                    ],
+                    "displayMode": "table",
+                    "placement": "bottom",
+                    "showLegend": true
+                },
+                "tooltip": {
+                    "mode": "multi",
+                    "sort": "none"
+                }
+            },
+            "pluginVersion": "8.4.0-beta1",
+            "targets": [
+                {
+                    "alias": "$tag_host",
+                    "datasource": {
+                        "type": "influxdb",
+                        "uid": "ETp-mW-nz"
+                    },
+                    "groupBy": [
+                        {
+                            "params": [
+                                "host"
+                            ],
+                            "type": "tag"
+                        }
+                    ],
+                    "measurement": "mem",
+                    "orderByTime": "ASC",
+                    "policy": "default",
+                    "query": "SELECT \"available\" FROM \"mem\" WHERE (\"host\" = 'Ubuntu' AND \"customer\" = 'DevOpsea' AND \"os\" = 'Linux' AND \"environment\" = 'Dev') AND $timeFilter GROUP BY \"host\"",
+                    "rawQuery": true,
+                    "refId": "A",
+                    "resultFormat": "time_series",
+                    "select": [
+                        [
+                            {
+                                "params": [
+                                    "available"
+                                ],
+                                "type": "field"
+                            }
+                        ]
+                    ],
+                    "tags": [
+                        {
+                            "key": "host",
+                            "operator": "=",
+                            "value": "Ubuntu"
+                        },
+                        {
+                            "condition": "AND",
+                            "key": "customer",
+                            "operator": "=",
+                            "value": "DevOpsea"
+                        },
+                        {
+                            "condition": "AND",
+                            "key": "os",
+                            "operator": "=",
+                            "value": "Linux"
+                        },
+                        {
+                            "condition": "AND",
+                            "key": "environment",
+                            "operator": "=",
+                            "value": "Dev"
+                        }
+                    ]
+                }
+            ],
+            "title": "Memory",
+            "type": "timeseries"
+        },
+        {
+            "datasource": {
+                "type": "influxdb",
+                "uid": "adu8m69nh8phcc"
+            },
+            "description": "",
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "palette-classic"
+                    },
+                    "custom": {
+                        "axisBorderShow": true,
+                        "axisCenteredZero": false,
+                        "axisColorMode": "series",
+                        "axisLabel": "Gigabyte",
+                        "axisPlacement": "auto",
+                        "barAlignment": 0,
+                        "drawStyle": "line",
+                        "fillOpacity": 40,
+                        "gradientMode": "opacity",
+                        "hideFrom": {
+                            "legend": false,
+                            "tooltip": false,
+                            "viz": false
+                        },
+                        "insertNulls": false,
+                        "lineInterpolation": "linear",
+                        "lineStyle": {
+                            "fill": "solid"
+                        },
+                        "lineWidth": 2,
+                        "pointSize": 5,
+                        "scaleDistribution": {
+                            "type": "linear"
+                        },
+                        "showPoints": "never",
+                        "spanNulls": false,
+                        "stacking": {
+                            "group": "A",
+                            "mode": "none"
+                        },
+                        "thresholdsStyle": {
+                            "mode": "line+area"
+                        }
+                    },
+                    "decimals": 0,
+                    "mappings": [],
+                    "max": 40000000000,
+                    "min": 0,
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "dark-red",
+                                "value": null
+                            },
+                            {
+                                "color": "transparent",
+                                "value": 5000000000
+                            }
+                        ]
+                    },
+                    "unit": "decbytes"
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 9,
+                "w": 8,
+                "x": 16,
+                "y": 17
+            },
+            "id": 26,
+            "options": {
+                "legend": {
+                    "calcs": [
+                        "min",
+                        "max",
+                        "lastNotNull"
+                    ],
+                    "displayMode": "table",
+                    "placement": "bottom",
+                    "showLegend": true
+                },
+                "tooltip": {
+                    "mode": "multi",
+                    "sort": "none"
+                }
+            },
+            "pluginVersion": "8.4.0-beta1",
+            "targets": [
+                {
+                    "alias": "$tag_host",
+                    "datasource": {
+                        "type": "influxdb",
+                        "uid": "ETp-mW-nz"
+                    },
+                    "groupBy": [
+                        {
+                            "params": [
+                                "host::tag"
+                            ],
+                            "type": "tag"
+                        }
+                    ],
+                    "measurement": "disk",
+                    "orderByTime": "ASC",
+                    "policy": "default",
+                    "query": "SELECT \"free\" FROM \"disk\" WHERE (\"host\" = 'Ubuntu' AND \"customer\" = 'DevOpsea' AND \"os\" = 'Linux' AND \"environment\" = 'Dev' AND \"path\" = '/') AND $timeFilter GROUP BY \"host\"::tag",
+                    "rawQuery": false,
+                    "refId": "A",
+                    "resultFormat": "time_series",
+                    "select": [
+                        [
+                            {
+                                "params": [
+                                    "free"
+                                ],
+                                "type": "field"
+                            }
+                        ]
+                    ],
+                    "tags": [
+                        {
+                            "key": "host",
+                            "operator": "=",
+                            "value": "Ubuntu"
+                        },
+                        {
+                            "condition": "AND",
+                            "key": "customer",
+                            "operator": "=",
+                            "value": "DevOpsea"
+                        },
+                        {
+                            "condition": "AND",
+                            "key": "os",
+                            "operator": "=",
+                            "value": "Linux"
+                        },
+                        {
+                            "condition": "AND",
+                            "key": "environment",
+                            "operator": "=",
+                            "value": "Dev"
+                        },
+                        {
+                            "condition": "AND",
+                            "key": "path",
+                            "operator": "=",
+                            "value": "/"
+                        }
+                    ]
+                }
+            ],
+            "title": "Disk",
+            "type": "timeseries"
+        },
+        {
+            "collapsed": false,
+            "datasource": {
+                "type": "influxdb",
+                "uid": "ddsr98u88mygwb"
+            },
+            "gridPos": {
+                "h": 1,
+                "w": 24,
+                "x": 0,
+                "y": 26
+            },
+            "id": 7,
+            "panels": [],
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "influxdb",
+                        "uid": "ddsr98u88mygwb"
+                    },
+                    "refId": "A"
+                }
+            ],
+            "title": "Windows 11",
+            "type": "row"
+        },
+        {
+            "alert": {
+                "alertRuleTags": {},
+                "conditions": [
+                    {
+                        "evaluator": {
+                            "params": [
+                                80
+                            ],
+                            "type": "gt"
+                        },
+                        "operator": {
+                            "type": "and"
+                        },
+                        "query": {
+                            "params": [
+                                "A",
+                                "5m",
+                                "now"
+                            ]
+                        },
+                        "reducer": {
+                            "params": [],
+                            "type": "avg"
+                        },
+                        "type": "query"
+                    }
+                ],
+                "executionErrorState": "alerting",
+                "for": "5m",
+                "frequency": "1m",
+                "handler": 1,
+                "name": "CPU alert",
+                "noDataState": "no_data",
+                "notifications": []
+            },
+            "datasource": {},
+            "description": "",
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "palette-classic"
+                    },
+                    "custom": {
+                        "axisBorderShow": false,
+                        "axisCenteredZero": false,
+                        "axisColorMode": "text",
+                        "axisLabel": "",
+                        "axisPlacement": "auto",
+                        "barAlignment": 0,
+                        "drawStyle": "line",
+                        "fillOpacity": 40,
+                        "gradientMode": "opacity",
+                        "hideFrom": {
+                            "legend": false,
+                            "tooltip": false,
+                            "viz": false
+                        },
+                        "insertNulls": false,
+                        "lineInterpolation": "linear",
+                        "lineWidth": 2,
+                        "pointSize": 5,
+                        "scaleDistribution": {
+                            "type": "linear"
+                        },
+                        "showPoints": "never",
+                        "spanNulls": false,
+                        "stacking": {
+                            "group": "A",
+                            "mode": "none"
+                        },
+                        "thresholdsStyle": {
+                            "mode": "line+area"
+                        }
+                    },
+                    "mappings": [],
+                    "max": 100,
+                    "min": 0,
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "transparent",
+                                "value": null
+                            },
+                            {
+                                "color": "red",
+                                "value": 80
+                            }
+                        ]
+                    },
+                    "unit": "percent"
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 9,
+                "w": 8,
+                "x": 0,
+                "y": 27
+            },
+            "id": 3,
+            "options": {
+                "legend": {
+                    "calcs": [
+                        "mean",
+                        "max",
+                        "min"
+                    ],
+                    "displayMode": "table",
+                    "placement": "bottom",
+                    "showLegend": true
+                },
+                "tooltip": {
+                    "mode": "multi",
+                    "sort": "none"
+                }
+            },
+            "pluginVersion": "8.4.0-beta1",
+            "targets": [
+                {
+                    "alias": "$tag_host",
+                    "datasource": {
+                        "type": "influxdb",
+                        "uid": "ETp-mW-nz"
+                    },
+                    "groupBy": [
+                        {
+                            "params": [
+                                "$__interval"
+                            ],
+                            "type": "time"
+                        },
+                        {
+                            "params": [
+                                "host"
+                            ],
+                            "type": "tag"
+                        },
+                        {
+                            "params": [
+                                "linear"
+                            ],
+                            "type": "fill"
+                        }
+                    ],
+                    "measurement": "win_cpu",
+                    "orderByTime": "ASC",
+                    "policy": "default",
+                    "refId": "A",
+                    "resultFormat": "time_series",
+                    "select": [
+                        [
+                            {
+                                "params": [
+                                    "Percent_Processor_Time"
+                                ],
+                                "type": "field"
+                            },
+                            {
+                                "params": [],
+                                "type": "mean"
+                            }
+                        ]
+                    ],
+                    "tags": [
+                        {
+                            "key": "host",
+                            "operator": "=",
+                            "value": "devopsea-dev"
+                        },
+                        {
+                            "condition": "AND",
+                            "key": "customer",
+                            "operator": "=",
+                            "value": "DevOpsea"
+                        },
+                        {
+                            "condition": "AND",
+                            "key": "os",
+                            "operator": "=",
+                            "value": "Windows"
+                        }
+                    ]
+                }
+            ],
+            "title": "CPU",
+            "type": "timeseries"
+        },
+        {
+            "alert": {
+                "alertRuleTags": {},
+                "conditions": [
+                    {
+                        "evaluator": {
+                            "params": [
+                                253999999
+                            ],
+                            "type": "lt"
+                        },
+                        "operator": {
+                            "type": "and"
+                        },
+                        "query": {
+                            "params": [
+                                "A",
+                                "5m",
+                                "now"
+                            ]
+                        },
+                        "reducer": {
+                            "params": [],
+                            "type": "avg"
+                        },
+                        "type": "query"
+                    }
+                ],
+                "executionErrorState": "alerting",
+                "for": "5m",
+                "frequency": "1m",
+                "handler": 1,
+                "name": "Memory alert",
+                "noDataState": "no_data",
+                "notifications": []
+            },
+            "datasource": {},
+            "description": "",
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "palette-classic"
+                    },
+                    "custom": {
+                        "axisBorderShow": false,
+                        "axisCenteredZero": false,
+                        "axisColorMode": "text",
+                        "axisLabel": "",
+                        "axisPlacement": "auto",
+                        "barAlignment": 0,
+                        "drawStyle": "line",
+                        "fillOpacity": 40,
+                        "gradientMode": "opacity",
+                        "hideFrom": {
+                            "legend": false,
+                            "tooltip": false,
+                            "viz": false
+                        },
+                        "insertNulls": false,
+                        "lineInterpolation": "linear",
+                        "lineWidth": 2,
+                        "pointSize": 5,
+                        "scaleDistribution": {
+                            "type": "linear"
+                        },
+                        "showPoints": "never",
+                        "spanNulls": false,
+                        "stacking": {
+                            "group": "A",
+                            "mode": "none"
+                        },
+                        "thresholdsStyle": {
+                            "mode": "line+area"
+                        }
+                    },
+                    "mappings": [],
+                    "max": 4589934592,
+                    "min": 0,
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "red",
+                                "value": null
+                            },
+                            {
+                                "color": "transparent",
+                                "value": 253999999
+                            }
+                        ]
+                    },
+                    "unit": "decbytes"
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 9,
+                "w": 8,
+                "x": 8,
+                "y": 27
+            },
+            "id": 8,
+            "options": {
+                "legend": {
+                    "calcs": [
+                        "mean",
+                        "max",
+                        "min"
+                    ],
+                    "displayMode": "table",
+                    "placement": "bottom",
+                    "showLegend": true
+                },
+                "tooltip": {
+                    "mode": "multi",
+                    "sort": "none"
+                }
+            },
+            "pluginVersion": "8.4.0-beta1",
+            "targets": [
+                {
+                    "alias": "$tag_host",
+                    "datasource": {
+                        "type": "influxdb",
+                        "uid": "ETp-mW-nz"
+                    },
+                    "groupBy": [
+                        {
+                            "params": [
+                                "host"
+                            ],
+                            "type": "tag"
+                        }
+                    ],
+                    "measurement": "win_mem",
+                    "orderByTime": "ASC",
+                    "policy": "default",
+                    "query": "SELECT mean(\"Available_Bytes\") FROM \"win_mem\" WHERE (\"customer\" = 'OpenWebinars') AND $timeFilter GROUP BY time($__interval), \"host\" fill(linear)",
+                    "rawQuery": false,
+                    "refId": "A",
+                    "resultFormat": "time_series",
+                    "select": [
+                        [
+                            {
+                                "params": [
+                                    "Available_Bytes"
+                                ],
+                                "type": "field"
+                            }
+                        ]
+                    ],
+                    "tags": [
+                        {
+                            "key": "host",
+                            "operator": "=",
+                            "value": "devopsea-dev"
+                        },
+                        {
+                            "condition": "AND",
+                            "key": "customer",
+                            "operator": "=",
+                            "value": "DevOpsea"
+                        },
+                        {
+                            "condition": "AND",
+                            "key": "os",
+                            "operator": "=",
+                            "value": "Windows"
+                        }
+                    ]
+                }
+            ],
+            "title": "Memory",
+            "type": "timeseries"
+        },
+        {
+            "alert": {
+                "alertRuleTags": {},
+                "conditions": [
+                    {
+                        "evaluator": {
+                            "params": [
+                                10000
+                            ],
+                            "type": "lt"
+                        },
+                        "operator": {
+                            "type": "and"
+                        },
+                        "query": {
+                            "params": [
+                                "A",
+                                "5m",
+                                "now"
+                            ]
+                        },
+                        "reducer": {
+                            "params": [],
+                            "type": "avg"
+                        },
+                        "type": "query"
+                    }
+                ],
+                "executionErrorState": "alerting",
+                "for": "5m",
+                "frequency": "1m",
+                "handler": 1,
+                "name": "Disk alert",
+                "noDataState": "no_data",
+                "notifications": []
+            },
+            "datasource": {},
+            "description": "",
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "palette-classic"
+                    },
+                    "custom": {
+                        "axisBorderShow": false,
+                        "axisCenteredZero": false,
+                        "axisColorMode": "text",
+                        "axisLabel": "",
+                        "axisPlacement": "auto",
+                        "barAlignment": 0,
+                        "drawStyle": "line",
+                        "fillOpacity": 40,
+                        "gradientMode": "opacity",
+                        "hideFrom": {
+                            "legend": false,
+                            "tooltip": false,
+                            "viz": false
+                        },
+                        "insertNulls": false,
+                        "lineInterpolation": "linear",
+                        "lineWidth": 2,
+                        "pointSize": 5,
+                        "scaleDistribution": {
+                            "type": "linear"
+                        },
+                        "showPoints": "never",
+                        "spanNulls": false,
+                        "stacking": {
+                            "group": "A",
+                            "mode": "none"
+                        },
+                        "thresholdsStyle": {
+                            "mode": "line+area"
+                        }
+                    },
+                    "mappings": [],
+                    "max": 130000,
+                    "min": 0,
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "red",
+                                "value": null
+                            },
+                            {
+                                "color": "transparent",
+                                "value": 10000
+                            }
+                        ]
+                    },
+                    "unit": "decmbytes"
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 9,
+                "w": 8,
+                "x": 16,
+                "y": 27
+            },
+            "id": 9,
+            "options": {
+                "legend": {
+                    "calcs": [
+                        "mean",
+                        "max",
+                        "min"
+                    ],
+                    "displayMode": "table",
+                    "placement": "bottom",
+                    "showLegend": true
+                },
+                "tooltip": {
+                    "mode": "multi",
+                    "sort": "none"
+                }
+            },
+            "pluginVersion": "8.4.0-beta1",
+            "targets": [
+                {
+                    "alias": "$tag_host",
+                    "datasource": {
+                        "type": "influxdb",
+                        "uid": "ETp-mW-nz"
+                    },
+                    "groupBy": [
+                        {
+                            "params": [
+                                "$__interval"
+                            ],
+                            "type": "time"
+                        },
+                        {
+                            "params": [
+                                "host"
+                            ],
+                            "type": "tag"
+                        },
+                        {
+                            "params": [
+                                "linear"
+                            ],
+                            "type": "fill"
+                        }
+                    ],
+                    "measurement": "win_disk",
+                    "orderByTime": "ASC",
+                    "policy": "default",
+                    "refId": "A",
+                    "resultFormat": "time_series",
+                    "select": [
+                        [
+                            {
+                                "params": [
+                                    "Free_Megabytes"
+                                ],
+                                "type": "field"
+                            },
+                            {
+                                "params": [],
+                                "type": "mean"
+                            }
+                        ]
+                    ],
+                    "tags": [
+                        {
+                            "key": "host",
+                            "operator": "=",
+                            "value": "devopsea-dev"
+                        },
+                        {
+                            "condition": "AND",
+                            "key": "customer",
+                            "operator": "=",
+                            "value": "DevOpsea"
+                        },
+                        {
+                            "condition": "AND",
+                            "key": "os",
+                            "operator": "=",
+                            "value": "Windows"
+                        }
+                    ]
+                }
+            ],
+            "title": "Disk",
+            "type": "timeseries"
+        }
+    ],
+    "refresh": "30s",
+    "schemaVersion": 39,
+    "tags": [],
+    "templating": {
+        "list": []
+    },
+    "time": {
+        "from": "now-30m",
+        "to": "now"
+    },
+    "timepicker": {},
+    "timezone": "",
+    "title": "First dashboard",
+    "uid": "0D88mZa7k",
+    "version": 22,
+    "weekStart": ""
+}
