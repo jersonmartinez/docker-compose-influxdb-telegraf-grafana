@@ -367,12 +367,19 @@ Recolecta métricas detalladas sobre el uso del procesador, lo que permite monit
 
 > [!NOTE]  
 > ObjectName: "Processor"
+> 
 > Counters:
+> 
 > "% Idle Time": Tiempo en porcentaje que el procesador está inactivo.
+> 
 > "% Interrupt Time": Tiempo en porcentaje que el procesador está ocupado manejando interrupciones.
+> 
 > "% Privileged Time": Tiempo en porcentaje que el procesador pasa ejecutando código en modo privilegiado (kernel).
+> 
 > "% User Time": Tiempo en porcentaje que el procesador pasa ejecutando código en modo usuario (aplicaciones).
+> 
 > "% Processor Time": Tiempo total en porcentaje que el procesador está ocupado (suma de modo usuario y modo kernel).
+> 
 > "% DPC Time": Tiempo en porcentaje que el procesador pasa manejando llamadas a procedimientos diferidos (DPCs), que son una parte del manejo de interrupciones.
 
 **Discos Lógicos (`LogicalDisk`):**
