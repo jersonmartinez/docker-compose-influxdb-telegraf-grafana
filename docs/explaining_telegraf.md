@@ -359,7 +359,7 @@ No hay cambios en la configuración del plugin de salida para InfluxDB entre los
 **CPU (`Processor`):**
 ```toml
 ObjectName = "Processor"
-Counters = ["% Idle Time", "% Processor Time", etc.]
+Counters = ["% Idle Time", "% Processor Time", "etc."]
 Measurement = "win_cpu"
 ```
 
@@ -385,7 +385,7 @@ Recolecta métricas detalladas sobre el uso del procesador, lo que permite monit
 **Discos Lógicos (`LogicalDisk`):**
 ```toml
 ObjectName = "LogicalDisk"
-Counters = ["% Free Space", "Free Megabytes", etc.]
+Counters = ["% Free Space", "Free Megabytes", "etc."]
 Measurement = "win_disk"
 ```
 
@@ -395,7 +395,7 @@ Proporciona información sobre el uso del espacio en disco y el rendimiento del 
 
 ```toml
 ObjectName = "PhysicalDisk"
-Counters = ["Disk Read Bytes/sec", "Disk Write Bytes/sec", etc.]
+Counters = ["Disk Read Bytes/sec", "Disk Write Bytes/sec", "etc."]
 Measurement = "win_diskio"
 ```
 
@@ -405,7 +405,7 @@ Monitorea las operaciones de entrada/salida de los discos físicos, lo que es cr
 
 ```toml
 ObjectName = "Network Interface"
-Counters = ["Bytes Received/sec", "Packets Received/sec", etc.]
+Counters = ["Bytes Received/sec", "Packets Received/sec", "etc."]
 Measurement = "win_net"
 ```
 
@@ -415,7 +415,7 @@ Mide el tráfico de red, ayudando a monitorear la velocidad de transferencia de 
 
 ```toml
 ObjectName = "System"
-Counters = ["Context Switches/sec", "Processor Queue Length", etc.]
+Counters = ["Context Switches/sec", "Processor Queue Length", "etc."]
 Measurement = "win_system"
 ```
 
@@ -425,7 +425,7 @@ Recoge métricas generales del sistema, como el número de cambios de contexto p
 
 ```toml
 ObjectName = "Memory"
-Counters = ["Available Bytes", "Pages/sec", etc.]
+Counters = ["Available Bytes", "Pages/sec", "etc."]
 Measurement = "win_mem"
 ```
 
