@@ -366,9 +366,9 @@ Measurement = "win_cpu"
 Recolecta métricas detalladas sobre el uso del procesador, lo que permite monitorear la carga de trabajo y el rendimiento del CPU.
 
 > [!NOTE]  
-> ObjectName: "Processor"
+> **ObjectName:** `"Processor"`
 > 
-> Counters:
+> **Counters:**
 > 
 > - `"% Idle Time"`: Tiempo en porcentaje que el procesador está inactivo.
 > 
