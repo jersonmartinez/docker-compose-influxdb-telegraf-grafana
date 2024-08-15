@@ -286,7 +286,8 @@ No hay diferencias en la configuración de `ignore_fs` para el plugin `disk` ent
 
 ### Consideraciones Adicionales
 
-En Docker, es común que Telegraf se ejecute en contenedores dedicados, y la configuración puede necesitar ajustes adicionales, como el mapeo de volúmenes o la configuración de permisos, para acceder a métricas del host.
+> [!IMPORTANT]  
+> En Docker, es común que Telegraf se ejecute en contenedores dedicados, y la configuración puede necesitar ajustes adicionales, como el mapeo de volúmenes o la configuración de permisos, para acceder a métricas del host.
 
 > [!NOTE]  
 > Las principales diferencias entre la configuración de Telegraf para Ubuntu, WSL con Debian, y Docker están en el nombre de host, los intervalos de recolección y envío de métricas, y la forma en que se direcciona la base de datos InfluxDB. Estas diferencias aseguran que la monitorización esté adaptada a las particularidades de un entorno Docker, optimizando la eficiencia y precisión de la recolección de métricas.
