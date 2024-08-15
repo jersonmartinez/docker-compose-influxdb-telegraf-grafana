@@ -291,3 +291,141 @@ No hay diferencias en la configuración de `ignore_fs` para el plugin `disk` ent
 
 > [!NOTE]  
 > Las principales diferencias entre la configuración de Telegraf para Ubuntu, WSL con Debian, y Docker están en el nombre de host, los intervalos de recolección y envío de métricas, y la forma en que se direcciona la base de datos InfluxDB. Estas diferencias aseguran que la monitorización esté adaptada a las particularidades de un entorno Docker, optimizando la eficiencia y precisión de la recolección de métricas.
+
+
+---
+
+# Monitorizar Windows (10 & 11)
+
+> [!IMPORTANT]  
+> Podemos encontrar esta configuracion en este fichero `.conf` sobre [Windows](https://github.com/jersonmartinez/docker-compose-influxdb-telegraf-grafana/blob/main/telegraf/telegraf-windows.conf).
+> 
+> La configuración de Telegraf para un entorno Windows tiene varias diferencias importantes en comparación con las configuraciones para Ubuntu, WSL, Docker, y otros sistemas Linux. Aquí te detallo cada sección y su propósito en la monitorización:
+
+### `hostname` y `os`
+
+```toml
+os = "Windows"
+hostname = "devopsea-dev"
+```
+
+Se establece el nombre del sistema operativo como `"Windows"` y el nombre de host específico para reflejar que la monitorización se realiza en un entorno Windows.
+
+### `agent` Configuration
+
+> [!IMPORTANT]  
+> En Windows, la ubicación del archivo de registro se ajusta para coincidir con la estructura de directorios típica de Windows, utilizando la carpeta `Program Files`.
+
+```toml
+logfile = "/Program Files/InfluxData/telegraf/telegraf.log"
+```
+
+#### Debugging y Logging
+
+```toml
+debug = false
+quiet = false
+```
+
+Estas configuraciones están explícitamente definidas en Windows para controlar la verbosidad de los logs, permitiendo un control más granular en entornos donde el rendimiento y la estabilidad son críticos.
+
+### `flush_interval` e `interval`
+
+**Todos los entornos:**
+```toml
+interval = "15s"
+flush_interval = "15s"
+```
+
+La frecuencia de recolección y envío de métricas se mantiene igual a 15 segundos en todos los entornos, incluido Windows. Esto asegura una consistencia en la temporalidad de las métricas recolectadas.
+
+### `outputs.influxdb`
+
+URL de conexión:
+```toml
+urls = ["http://192.168.0.7:8086"]
+```
+
+No hay cambios en la configuración del plugin de salida para InfluxDB entre los diferentes sistemas operativos. La URL, la base de datos y las credenciales permanecen constantes.
+
+### `inputs.win_perf_counters` (Específico de Windows)
+
+> [!NOTE]  
+> En Windows, la monitorización se realiza a través de contadores de rendimiento (Performance Counters), que son características nativas del sistema operativo para medir el rendimiento del hardware y software.
+
+**CPU (`Processor`):**
+```toml
+ObjectName = "Processor"
+Counters = ["% Idle Time", "% Processor Time", etc.]
+Measurement = "win_cpu"
+```
+
+Recolecta métricas detalladas sobre el uso del procesador, lo que permite monitorear la carga de trabajo y el rendimiento del CPU.
+
+**Discos Lógicos (`LogicalDisk`):**
+```toml
+ObjectName = "LogicalDisk"
+Counters = ["% Free Space", "Free Megabytes", etc.]
+Measurement = "win_disk"
+```
+
+Proporciona información sobre el uso del espacio en disco y el rendimiento del disco lógico, ayudando a identificar cuellos de botella o problemas de capacidad.
+
+**Discos Físicos (`PhysicalDisk`):**
+
+```toml
+ObjectName = "PhysicalDisk"
+Counters = ["Disk Read Bytes/sec", "Disk Write Bytes/sec", etc.]
+Measurement = "win_diskio"
+```
+
+Monitorea las operaciones de entrada/salida de los discos físicos, lo que es crucial para evaluar el rendimiento del almacenamiento.
+
+**Red (`Network Interface`):**
+
+```toml
+ObjectName = "Network Interface"
+Counters = ["Bytes Received/sec", "Packets Received/sec", etc.]
+Measurement = "win_net"
+```
+
+Mide el tráfico de red, ayudando a monitorear la velocidad de transferencia de datos y detectar posibles problemas de conectividad.
+
+**Sistema (`System`):**
+
+```toml
+ObjectName = "System"
+Counters = ["Context Switches/sec", "Processor Queue Length", etc.]
+Measurement = "win_system"
+```
+
+Recoge métricas generales del sistema, como el número de cambios de contexto por segundo, que son indicadores del rendimiento general del sistema.
+
+**Memoria (`Memory`):**
+
+```toml
+ObjectName = "Memory"
+Counters = ["Available Bytes", "Pages/sec", etc.]
+Measurement = "win_mem"
+```
+
+Proporciona información sobre la disponibilidad y el uso de la memoria, lo que es fundamental para identificar problemas de memoria insuficiente o fugas de memoria.
+
+**Archivo de Paginación (`Paging File`):**
+
+```toml
+ObjectName = "Paging File"
+Counters = ["% Usage"]
+Measurement = "win_swap"
+```
+
+Monitorea el uso del archivo de paginación, que es crucial en la gestión de la memoria virtual en Windows.
+
+### Consideraciones Adicionales
+
+- **Entorno Windows:** Al monitorear un sistema Windows, es fundamental usar los contadores de rendimiento específicos del sistema operativo para obtener métricas precisas y relevantes. A diferencia de Linux, donde se utilizan plugins más genéricos como `cpu`, `disk`, y `mem`, en Windows es necesario especificar cada objeto y contador que se desea monitorear.
+
+- **Compatibilidad:** Asegúrate de que el agente Telegraf tenga los permisos necesarios para acceder a los contadores de rendimiento y de que el servicio de rendimiento esté habilitado en el sistema operativo Windows.
+
+> [!NOTE]  
+> La configuración de Telegraf en Windows difiere significativamente de la de Linux y otros entornos debido a la naturaleza del sistema operativo y las herramientas disponibles para la monitorización. Utiliza contadores de rendimiento nativos de Windows para recolectar métricas detalladas del sistema, lo que permite un monitoreo más preciso del rendimiento en entornos Windows.
