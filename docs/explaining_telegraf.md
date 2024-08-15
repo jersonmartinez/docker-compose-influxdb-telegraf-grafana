@@ -226,3 +226,67 @@ Los mismos plugins de entrada están configurados para recolectar métricas de C
 
 > [!NOTE]  
 > Las principales diferencias entre las configuraciones de Telegraf para Ubuntu y WSL con Debian son el nombre de host y la lista de sistemas de archivos que se ignoran en el plugin disk. Estas diferencias aseguran que la monitorización esté adaptada al entorno específico de WSL y que las métricas recolectadas sean precisas y relevantes.
+
+
+---
+
+# Monitorizar contenedores Docker
+
+> [!IMPORTANT]  
+> Podemos encontrar esta configuracion en este fichero `.conf` sobre [Contenedores Docker](https://github.com/jersonmartinez/docker-compose-influxdb-telegraf-grafana/blob/main/telegraf/telegraf.conf). También tienes [este segundo ejemplo](https://github.com/jersonmartinez/docker-compose-influxdb-telegraf-grafana/blob/main/telegraf/telegraf_second.conf), que se representa con otro fichero de configuración.
+> 
+> La configuración de Telegraf en un contenedor Docker presenta algunas diferencias importantes en comparación con las configuraciones para Ubuntu y WSL con Debian. A continuación se detallan las diferencias y se explica el propósito de cada ajuste en el contexto de un entorno Docker:
+
+### `hostname`
+
+El nombre de host se establece como `"docker-telegraf"` para reflejar que esta instancia de Telegraf está ejecutándose dentro de un contenedor Docker. 
+
+```toml
+hostname = "docker-telegraf"
+```
+
+> [!NOTE]  
+> Esto es útil para identificar correctamente el origen de las métricas en un entorno de monitorización que puede incluir múltiples contenedores.
+
+
+## `interval` y `flush_interval` en el Plugin agent
+
+```toml
+interval = "60s"
+flush_interval = "10s"
+```
+
+- **interval** = `"60s"`: En la configuración para Docker, el intervalo de recolección de métricas se establece en 60 segundos, en lugar de 15 segundos. Esto puede deberse a que los contenedores suelen tener un ciclo de vida más corto o a que se prefiera un intervalo más largo para reducir la sobrecarga en entornos con muchos contenedores.
+
+- **flush_interval** = `"10s"`: El intervalo de envío de datos a InfluxDB se reduce a 10 segundos, lo que asegura que las métricas se envíen rápidamente, a pesar del intervalo de recolección más largo.
+
+
+### `urls` en el Plugin `outputs.influxdb`
+
+```toml
+urls = ["http://influxdb:8086"]
+```
+
+La URL para la base de datos InfluxDB en la configuración de Docker utiliza un nombre de servicio (`influxdb`) en lugar de una dirección IP. Esto se debe a que, dentro de un entorno Docker, los servicios suelen ser referenciados por sus nombres de servicio en lugar de por direcciones IP, facilitando la comunicación entre contenedores.
+
+### `ignore_fs` en el Plugin `disk`
+
+```toml
+ignore_fs = ["tmpfs", "devtmpfs", "devfs", "iso9660", "overlay", "aufs", "squashfs"]
+```
+
+No hay diferencias en la configuración de `ignore_fs` para el plugin `disk` entre Ubuntu, WSL con Debian y Docker. Sin embargo, es importante señalar que en un entorno Docker, los sistemas de archivos como `overlay` y `aufs` son especialmente relevantes, ya que son comúnmente utilizados por Docker para manejar capas de contenedores.
+
+### Otros Plugins de Entrada (`inputs`)
+
+**Ubuntu, WSL con Debian, y Docker:** Los mismos plugins de entrada (cpu, diskio, kernel, mem, processes, swap, system) están configurados en todas las versiones. Esto asegura que las métricas esenciales del sistema sean recolectadas de manera consistente, sin importar el entorno.
+
+> [!NOTE]  
+> Aunque la configuración es la misma, el contexto en el que se ejecutan puede cambiar la interpretación de las métricas. Por ejemplo, en un entorno Docker, las métricas de CPU y memoria podrían estar limitadas al contenedor y no reflejar todo el sistema host, a menos que se configuren adecuadamente.
+
+### Consideraciones Adicionales
+
+En Docker, es común que Telegraf se ejecute en contenedores dedicados, y la configuración puede necesitar ajustes adicionales, como el mapeo de volúmenes o la configuración de permisos, para acceder a métricas del host.
+
+> [!NOTE]  
+> Las principales diferencias entre la configuración de Telegraf para Ubuntu, WSL con Debian, y Docker están en el nombre de host, los intervalos de recolección y envío de métricas, y la forma en que se direcciona la base de datos InfluxDB. Estas diferencias aseguran que la monitorización esté adaptada a las particularidades de un entorno Docker, optimizando la eficiencia y precisión de la recolección de métricas.
