@@ -36,16 +36,16 @@ Estas etiquetas permiten filtrar y segmentar los datos fácilmente en la base de
 #### Descripción
 Este bloque configura el comportamiento del agente de Telegraf, como la frecuencia de recolección de métricas y el manejo de buffers.
 
-**interval** = `"15s"`: Telegraf recopilará métricas cada 15 segundos.
-**round_interval** = `true`: Asegura que las recolecciones se realicen en intervalos redondeados, como al minuto exacto, mejorando la alineación de los datos.
-**metric_batch_size** = `1000`: Número máximo de métricas que se pueden enviar en una sola petición.
-**metric_buffer_limit** = `10000`: Máximo de métricas que se pueden almacenar en el buffer antes de ser descartadas si no se pueden enviar a tiempo.
-**collection_jitter** = `"0s"`: No se añade variación al intervalo de recolección.
-**flush_interval** = `"15s"`: Frecuencia con la que Telegraf enviará los datos a la base de datos configurada.
-**flush_jitter** = `"0s"`: No se añade variación al intervalo de envío.
-**precision** = `""`: Deja la precisión de las métricas a la predeterminada.
-**hostname** = `"Ubuntu"`: Define el nombre de host que se incluirá en las métricas.
-**omit_hostname** = `false`: Incluye el nombre de host en las métricas.
+- **interval** = `"15s"`: Telegraf recopilará métricas cada 15 segundos.
+- **round_interval** = `true`: Asegura que las recolecciones se realicen en intervalos redondeados, como al minuto exacto, mejorando la alineación de los datos.
+- **metric_batch_size** = `1000`: Número máximo de métricas que se pueden enviar en una sola petición.
+- **metric_buffer_limit** = `10000`: Máximo de métricas que se pueden almacenar en el buffer antes de ser descartadas si no se pueden enviar a tiempo.
+- **collection_jitter** = `"0s"`: No se añade variación al intervalo de recolección.
+- **flush_interval** = `"15s"`: Frecuencia con la que Telegraf enviará los datos a la base de datos configurada.
+- **flush_jitter** = `"0s"`: No se añade variación al intervalo de envío.
+- **precision** = `""`: Deja la precisión de las métricas a la predeterminada.
+- **hostname** = `"Ubuntu"`: Define el nombre de host que se incluirá en las métricas.
+- **omit_hostname** = `false`: Incluye el nombre de host en las métricas.
 
 #### Función en la Monitorización
 Este bloque define cómo y cuándo se recopilan y envían las métricas. Configuraciones como `interval`, `flush_interval`, y `metric_batch_size` impactan directamente en la eficiencia y el rendimiento de la monitorización.
@@ -65,10 +65,10 @@ Este bloque define cómo y cuándo se recopilan y envían las métricas. Configu
 #### Descripción
 Este bloque define cómo y dónde Telegraf enviará las métricas. En este caso, está configurado para enviar datos a una instancia de InfluxDB.
 
-**urls**: URL del servidor InfluxDB.
-**timeout**: Tiempo de espera para la conexión.
-**database**: Nombre de la base de datos en InfluxDB.
-**username** y **password**: Credenciales de acceso.
+- **urls**: URL del servidor InfluxDB.
+- **timeout**: Tiempo de espera para la conexión.
+- **database**: Nombre de la base de datos en InfluxDB.
+- **username** y **password**: Credenciales de acceso.
 
 #### Función en la Monitorización
 Este bloque es crucial para que las métricas recopiladas por Telegraf se envíen a InfluxDB, donde se almacenarán para su análisis y visualización. La URL especifica la dirección del servidor de InfluxDB, y el nombre de la base de datos (`database = "influx"`) indica dónde se almacenarán los datos.
@@ -87,10 +87,10 @@ Este bloque es crucial para que las métricas recopiladas por Telegraf se envíe
 #### Descripción
 Recoge métricas de uso de la CPU.
 
-**percpu** = `true`: Recoge datos de uso de CPU por núcleo.
-**totalcpu** = `true`: Recoge datos del uso total de CPU.
-**collect_cpu_time** = `false`: No recoge el tiempo total de CPU.
-**report_active** = `false`: No informa sobre CPUs inactivas.
+- **percpu** = `true`: Recoge datos de uso de CPU por núcleo.
+- **totalcpu** = `true`: Recoge datos del uso total de CPU.
+- **collect_cpu_time** = `false`: No recoge el tiempo total de CPU.
+- **report_active** = `false`: No informa sobre CPUs inactivas.
 
 #### Función en la Monitorización
 Permite analizar el uso de la CPU de manera detallada, identificando cuellos de botella en el rendimiento y ayudando a optimizar el uso de los recursos del sistema.
