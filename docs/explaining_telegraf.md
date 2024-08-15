@@ -1,6 +1,7 @@
 # Configuración de Telegraf para Monitorización
 
-Este archivo de configuración de Telegraf está diseñado para recopilar métricas del sistema en un entorno Linux y enviarlas a una base de datos InfluxDB. A continuación, se detalla la configuración y el propósito de cada bloque.
+> [!NOTE]  
+> Este archivo de configuración de Telegraf está diseñado para recopilar métricas del sistema en un entorno Linux y enviarlas a una base de datos InfluxDB. A continuación, se detalla la configuración y el propósito de cada bloque.
 
 ## Global Tags
 
