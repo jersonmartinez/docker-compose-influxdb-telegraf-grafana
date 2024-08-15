@@ -353,6 +353,9 @@ No hay cambios en la configuración del plugin de salida para InfluxDB entre los
 > [!NOTE]  
 > En Windows, la monitorización se realiza a través de contadores de rendimiento (Performance Counters), que son características nativas del sistema operativo para medir el rendimiento del hardware y software.
 
+> [!IMPORTANT]  
+> En Windows, los contadores de rendimiento (*Performance Counters*) son mecanismos que proporcionan información sobre el rendimiento de varios aspectos del sistema operativo y las aplicaciones que se ejecutan en él. Estos contadores están organizados en objetos de rendimiento, cada uno de los cuales representa una categoría específica de métricas, como CPU, memoria, disco, red, etc.
+
 **CPU (`Processor`):**
 ```toml
 ObjectName = "Processor"
@@ -361,6 +364,16 @@ Measurement = "win_cpu"
 ```
 
 Recolecta métricas detalladas sobre el uso del procesador, lo que permite monitorear la carga de trabajo y el rendimiento del CPU.
+
+> [!NOTE]  
+> ObjectName: "Processor"
+> Counters:
+> "% Idle Time": Tiempo en porcentaje que el procesador está inactivo.
+> "% Interrupt Time": Tiempo en porcentaje que el procesador está ocupado manejando interrupciones.
+> "% Privileged Time": Tiempo en porcentaje que el procesador pasa ejecutando código en modo privilegiado (kernel).
+> "% User Time": Tiempo en porcentaje que el procesador pasa ejecutando código en modo usuario (aplicaciones).
+> "% Processor Time": Tiempo total en porcentaje que el procesador está ocupado (suma de modo usuario y modo kernel).
+> "% DPC Time": Tiempo en porcentaje que el procesador pasa manejando llamadas a procedimientos diferidos (DPCs), que son una parte del manejo de interrupciones.
 
 **Discos Lógicos (`LogicalDisk`):**
 ```toml
