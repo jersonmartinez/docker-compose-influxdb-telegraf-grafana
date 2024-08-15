@@ -186,7 +186,7 @@ Este archivo de configuración establece una base sólida para monitorizar un si
 
 # Monitorizar Debian desde Windows Subsystem for Linux (WSL)
 
-> [!IMPORTANT]  
+> [!IMPORTANTE]  
 > Podemos encontrar esta configuracion en este fichero `.conf` sobre [Telegraf WSL - Debian](https://github.com/jersonmartinez/docker-compose-influxdb-telegraf-grafana/blob/main/telegraf/telegraf-wsl-linux.conf).
 
 La configuración de Telegraf para WSL con Debian es muy similar a la que se usaba para Ubuntu, pero hay algunas diferencias clave que es importante resaltar:
