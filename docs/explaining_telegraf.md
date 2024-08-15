@@ -224,15 +224,3 @@ Los mismos plugins de entrada están configurados para recolectar métricas de C
 
 > [!NOTE]  
 > Las principales diferencias entre las configuraciones de Telegraf para Ubuntu y WSL con Debian son el nombre de host y la lista de sistemas de archivos que se ignoran en el plugin disk. Estas diferencias aseguran que la monitorización esté adaptada al entorno específico de WSL y que las métricas recolectadas sean precisas y relevantes.
-
-> [!TIP]
-> Optional information to help a user be more successful.
-
-> [!IMPORTANT]  
-> Crucial information necessary for users to succeed.
-
-> [!WARNING]  
-> Critical content demanding immediate user attention due to potential risks.
-
-> [!CAUTION]
-> Negative potential consequences of an action.
