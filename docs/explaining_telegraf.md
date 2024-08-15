@@ -1,7 +1,9 @@
-# Configuración de Telegraf para Monitorización
+# Configuración de Telegraf para Monitorizar Ubuntu
 
 > [!NOTE]  
 > Este archivo de configuración de Telegraf está diseñado para recopilar métricas del sistema en un entorno Linux y enviarlas a una base de datos InfluxDB. A continuación, se detalla la configuración y el propósito de cada bloque.
+>
+> Nos vamos a guiar mediante la [configuración de Telegraf para Ubuntu](https://github.com/jersonmartinez/docker-compose-influxdb-telegraf-grafana/blob/main/telegraf/telegraf-ubuntu.conf).
 
 ## Global Tags
 
