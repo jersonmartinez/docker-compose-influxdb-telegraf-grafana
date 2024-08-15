@@ -60,6 +60,10 @@ nano /etc/telegraf/telegraf.conf
 
 Esta guía detalla la configuración del archivo `telegraf.conf` para la instalación de Telegraf en un sistema Linux Ubuntu, el fichero está en: `/telegraf/telegraf-ubuntu.conf`. La configuración incluye etiquetas globales, parámetros del agente, plugins de salida y entrada.
 
+#### Entendiendo el fichero de configuración `telegraf.conf` en Ubuntu
+
+
+
 Lo único que cambia en esta configuración respecto a la de WSL, es el `hostname`.
 
 Esta configuración proporciona una base sólida para la recopilación de métricas del sistema utilizando Telegraf en un entorno Linux Ubuntu. Puedes personalizar aún más la configuración según tus necesidades específicas.
