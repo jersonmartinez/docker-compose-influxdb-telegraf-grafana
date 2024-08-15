@@ -382,6 +382,8 @@ Recolecta métricas detalladas sobre el uso del procesador, lo que permite monit
 > 
 > - `"% DPC Time"`: Tiempo en porcentaje que el procesador pasa manejando llamadas a procedimientos diferidos (DPCs), que son una parte del manejo de interrupciones.
 
+Estos contadores ayudan a monitorear la utilización y eficiencia del procesador. Identificar altos porcentajes en `"Privileged Time"` o `"Interrupt Time"` puede indicar un problema en el manejo de interrupciones o en la eficiencia del sistema.
+
 **Discos Lógicos (`LogicalDisk`):**
 ```toml
 ObjectName = "LogicalDisk"
@@ -390,6 +392,27 @@ Measurement = "win_disk"
 ```
 
 Proporciona información sobre el uso del espacio en disco y el rendimiento del disco lógico, ayudando a identificar cuellos de botella o problemas de capacidad.
+
+> [!NOTE]  
+> **ObjectName:** `"LogicalDisk"`
+> 
+> **Counters:**
+> 
+> - `"% Idle Time"`: Tiempo en porcentaje que el procesador está inactivo.
+> 
+> - `"% Disk Time"`: Tiempo total en porcentaje que el disco está ocupado.
+> 
+> - `"% Disk Read Time"`: Tiempo en porcentaje dedicado a operaciones de lectura.
+> 
+> - `"% Disk Write Time":` Tiempo en porcentaje dedicado a operaciones de escritura.
+> 
+> - `"Current Disk Queue Length"`: Longitud de la cola de espera del disco, indicando la cantidad de operaciones pendientes.
+> 
+> - `"% Free Space"`: Porcentaje de espacio libre en el disco.
+>
+> - `"Free Megabytes"`: Espacio libre en megabytes.
+
+Estos contadores permiten monitorear la actividad y el rendimiento del disco lógico, identificando posibles cuellos de botella en el acceso a datos o problemas de capacidad.
 
 **Discos Físicos (`PhysicalDisk`):**
 
@@ -401,6 +424,29 @@ Measurement = "win_diskio"
 
 Monitorea las operaciones de entrada/salida de los discos físicos, lo que es crucial para evaluar el rendimiento del almacenamiento.
 
+> [!NOTE]  
+> **ObjectName:** `"PhysicalDisk"`
+> 
+> **Counters:**
+> 
+> - `"Disk Read Bytes/sec"`: Bytes leídos por segundo.
+> 
+> - `"Disk Write Bytes/sec"`: Bytes escritos por segundo.
+> 
+> - `"Current Disk Queue Length"`: Longitud actual de la cola de espera para operaciones de disco.
+> 
+> - `"Disk Reads/sec"`: Cantidad de lecturas de disco por segundo.
+> 
+> - `"Disk Writes/sec"`: Cantidad de escrituras de disco por segundo.
+> 
+> - `"% Disk Time"`: Tiempo total en porcentaje que el disco está ocupado.
+> 
+> - `"% Disk Read Time"`: Tiempo en porcentaje dedicado a operaciones de lectura.
+> 
+> - `"% Disk Write Time"`: Tiempo en porcentaje dedicado a operaciones de escritura.
+
+Estos contadores proporcionan una visión detallada del rendimiento del hardware de almacenamiento, útil para identificar problemas de rendimiento en la E/S (entrada/salida).
+
 **Red (`Network Interface`):**
 
 ```toml
@@ -410,6 +456,29 @@ Measurement = "win_net"
 ```
 
 Mide el tráfico de red, ayudando a monitorear la velocidad de transferencia de datos y detectar posibles problemas de conectividad.
+
+> [!NOTE]  
+> **ObjectName:** `"Network Interface"`
+> 
+> **Counters:**
+> 
+> - `"Bytes Received/sec"`: Bytes recibidos por segundo.
+> 
+> - `"Bytes Sent/sec"`: Bytes enviados por segundo.
+> 
+> - `"Packets Received/sec"`: Paquetes recibidos por segundo.
+> 
+> - `"Packets Sent/sec"`: Paquetes enviados por segundo.
+> 
+> - `"Packets Received Discarded"`: Paquetes recibidos que fueron descartados.
+> 
+> - `"Packets Outbound Discarded"`: Paquetes salientes que fueron descartados.
+> 
+> - `"Packets Received Errors"`: Errores en los paquetes recibidos.
+> 
+> - `"Packets Outbound Errors"`: Errores en los paquetes salientes.
+
+Estos contadores permiten analizar la eficiencia de la red, identificando problemas de rendimiento, como pérdida de paquetes, que pueden afectar la conectividad y el rendimiento de aplicaciones basadas en red.
 
 **Sistema (`System`):**
 
@@ -421,6 +490,21 @@ Measurement = "win_system"
 
 Recoge métricas generales del sistema, como el número de cambios de contexto por segundo, que son indicadores del rendimiento general del sistema.
 
+> [!NOTE]  
+> **ObjectName:** `"System"`
+> 
+> **Counters:**
+> 
+> - `"Context Switches/sec"`: Número de cambios de contexto por segundo, indicador de la eficiencia del procesador en la gestión de procesos.
+> 
+> - `"System Calls/sec"`: Número de llamadas al sistema por segundo, un indicador del volumen de trabajo que maneja el sistema operativo.
+> 
+> - `"Processor Queue Length"`: Longitud de la cola de procesadores, que indica cuántos hilos están esperando ser procesados.
+> 
+> - `"System Up Time"`: Tiempo que el sistema ha estado en funcionamiento sin reinicios.
+
+Estos contadores proporcionan una visión del rendimiento general del sistema, ayudando a identificar problemas en la gestión de recursos y el estado operativo del sistema.
+
 **Memoria (`Memory`):**
 
 ```toml
@@ -431,6 +515,36 @@ Measurement = "win_mem"
 
 Proporciona información sobre la disponibilidad y el uso de la memoria, lo que es fundamental para identificar problemas de memoria insuficiente o fugas de memoria.
 
+> [!NOTE]  
+> **ObjectName:** `"Memory"`
+> 
+> **Counters:**
+> 
+> - `"Available Bytes"`: Cantidad de memoria física disponible.
+> 
+> - `"Cache Faults/sec"`: Fallos de caché por segundo, indicando la frecuencia con la que se requieren operaciones adicionales para acceder a los datos.
+> 
+> - `"Demand Zero Faults/sec"`: Fallos de demanda de ceros por segundo, un tipo de fallo de página.
+> 
+> - `"Page Faults/sec"`: Fallos de página por segundo, indicando cuándo el sistema tiene que cargar datos de la memoria secundaria (disco) a la memoria primaria (RAM).
+> 
+> - `"Pages/sec"`: Número de páginas leídas o escritas en la memoria virtual por segundo.
+> 
+> - `"Transition Faults/sec"`: Fallos de transición por segundo, ocurren cuando una página cambia de memoria caché a memoria activa.
+> 
+> - `"Pool Nonpaged Bytes"`: Bytes en el pool de memoria no paginada, un tipo de memoria que no se puede intercambiar en el disco.
+> 
+> - `"Pool Paged Bytes"`: Bytes en el pool de memoria paginada, un tipo de memoria que puede ser intercambiada en el disco.
+> 
+> - `"Standby Cache Reserve Bytes"`: Bytes reservados en la caché de standby, que es memoria disponible para procesos futuros.
+> 
+> - `"Standby Cache Normal Priority Bytes"`: Bytes en la caché de standby de prioridad normal.
+> 
+> - `"Standby Cache Core Bytes"`: Bytes en la caché de standby que son esenciales para el funcionamiento del sistema.
+
+
+Monitorear estos contadores es esencial para detectar problemas relacionados con la memoria, como insuficiencia de memoria física, fugas de memoria, y eficiencia de la memoria caché.
+
 **Archivo de Paginación (`Paging File`):**
 
 ```toml
@@ -440,6 +554,18 @@ Measurement = "win_swap"
 ```
 
 Monitorea el uso del archivo de paginación, que es crucial en la gestión de la memoria virtual en Windows.
+
+> [!NOTE]  
+> **ObjectName:** `"Paging File"`
+> 
+> **Counters:**
+> 
+> - `"% Usage"`: Porcentaje de uso del archivo de paginación.
+
+Permite monitorear el uso del archivo de paginación, lo que es crucial para entender cómo se maneja la memoria virtual y si el sistema está utilizando demasiada memoria paginada, lo cual puede impactar negativamente el rendimiento.
+
+> [!IMPORTANT]  
+> Los contadores de rendimiento en Windows son herramientas potentes que permiten monitorear casi todos los aspectos del rendimiento del sistema operativo y sus componentes. Al configurar Telegraf para capturar estos contadores, puedes obtener una visión detallada y precisa del estado y rendimiento de un sistema Windows, lo que es vital para una monitorización efectiva y proactiva.
 
 ### Consideraciones Adicionales
 
