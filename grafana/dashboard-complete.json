@@ -154,7 +154,7 @@
             },
             "gridPos": {
                 "h": 5,
-                "w": 4,
+                "w": 6,
                 "x": 0,
                 "y": 1
             },
@@ -354,8 +354,8 @@
             },
             "gridPos": {
                 "h": 5,
-                "w": 4,
-                "x": 4,
+                "w": 6,
+                "x": 6,
                 "y": 1
             },
             "id": 5,
@@ -554,8 +554,8 @@
             },
             "gridPos": {
                 "h": 5,
-                "w": 4,
-                "x": 8,
+                "w": 6,
+                "x": 12,
                 "y": 1
             },
             "id": 12,
@@ -663,6 +663,290 @@
             "fieldConfig": {
                 "defaults": {
                     "color": {
+                        "mode": "thresholds"
+                    },
+                    "mappings": [
+                        {
+                            "options": {
+                                "0": {
+                                    "color": "red",
+                                    "index": 0,
+                                    "text": "DOWN"
+                                }
+                            },
+                            "type": "value"
+                        },
+                        {
+                            "options": {
+                                "from": 1,
+                                "result": {
+                                    "color": "green",
+                                    "index": 1,
+                                    "text": "UP"
+                                },
+                                "to": 1000
+                            },
+                            "type": "range"
+                        }
+                    ],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            },
+                            {
+                                "color": "red",
+                                "value": 80
+                            }
+                        ]
+                    },
+                    "unit": "string"
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 10,
+                "w": 3,
+                "x": 18,
+                "y": 1
+            },
+            "id": 27,
+            "options": {
+                "colorMode": "value",
+                "graphMode": "area",
+                "justifyMode": "auto",
+                "orientation": "auto",
+                "percentChangeColorMode": "standard",
+                "reduceOptions": {
+                    "calcs": [
+                        "lastNotNull"
+                    ],
+                    "fields": "",
+                    "values": false
+                },
+                "showPercentChange": false,
+                "textMode": "auto",
+                "wideLayout": true
+            },
+            "pluginVersion": "11.1.3",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "influxdb",
+                        "uid": "adu8m69nh8phcc"
+                    },
+                    "groupBy": [
+                        {
+                            "params": [
+                                "5m"
+                            ],
+                            "type": "time"
+                        },
+                        {
+                            "params": [
+                                "port::tag"
+                            ],
+                            "type": "tag"
+                        },
+                        {
+                            "params": [
+                                "null"
+                            ],
+                            "type": "fill"
+                        }
+                    ],
+                    "measurement": "nginx",
+                    "orderByTime": "ASC",
+                    "policy": "default",
+                    "query": "SELECT count(\"active\") FROM \"nginx\" WHERE (\"host\"::tag = 'docker-telegraf' AND \"customer\"::tag = 'DevOpsea' AND \"os\"::tag = 'Linux' AND \"port\"::tag = '80') AND $timeFilter GROUP BY time(1m), \"port\"::tag fill(null)",
+                    "rawQuery": true,
+                    "refId": "A",
+                    "resultFormat": "time_series",
+                    "select": [
+                        [
+                            {
+                                "params": [
+                                    "active"
+                                ],
+                                "type": "field"
+                            },
+                            {
+                                "params": [],
+                                "type": "count"
+                            }
+                        ]
+                    ],
+                    "tags": [
+                        {
+                            "key": "host::tag",
+                            "operator": "=",
+                            "value": "docker-telegraf"
+                        },
+                        {
+                            "condition": "AND",
+                            "key": "customer::tag",
+                            "operator": "=",
+                            "value": "DevOpsea"
+                        },
+                        {
+                            "condition": "AND",
+                            "key": "os::tag",
+                            "operator": "=",
+                            "value": "Linux"
+                        },
+                        {
+                            "condition": "AND",
+                            "key": "port::tag",
+                            "operator": "=",
+                            "value": "80"
+                        }
+                    ]
+                }
+            ],
+            "title": "Nginx Status",
+            "type": "stat"
+        },
+        {
+            "datasource": {
+                "type": "influxdb",
+                "uid": "adu8m69nh8phcc"
+            },
+            "description": "Nginx - Active Connections",
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "mappings": [
+                        {
+                            "options": {
+                                "0": {
+                                    "color": "red",
+                                    "index": 0,
+                                    "text": "No connections"
+                                }
+                            },
+                            "type": "value"
+                        }
+                    ],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            },
+                            {
+                                "color": "red",
+                                "value": 80
+                            }
+                        ]
+                    },
+                    "unit": "string"
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 5,
+                "w": 3,
+                "x": 21,
+                "y": 1
+            },
+            "id": 28,
+            "options": {
+                "colorMode": "value",
+                "graphMode": "area",
+                "justifyMode": "auto",
+                "orientation": "auto",
+                "percentChangeColorMode": "standard",
+                "reduceOptions": {
+                    "calcs": [
+                        "lastNotNull"
+                    ],
+                    "fields": "",
+                    "values": false
+                },
+                "showPercentChange": false,
+                "textMode": "auto",
+                "wideLayout": true
+            },
+            "pluginVersion": "11.1.3",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "influxdb",
+                        "uid": "adu8m69nh8phcc"
+                    },
+                    "groupBy": [
+                        {
+                            "params": [
+                                "1m"
+                            ],
+                            "type": "time"
+                        }
+                    ],
+                    "measurement": "nginx",
+                    "orderByTime": "ASC",
+                    "policy": "default",
+                    "query": "SELECT sum(\"active\") \nFROM \"nginx\" \nWHERE \"host\" = 'docker-telegraf' \n  AND \"customer\" = 'DevOpsea' \n  AND \"os\" = 'Linux' \n  AND \"port\" = '80' \n  AND $timeFilter \nGROUP BY time(5s) fill(null)",
+                    "rawQuery": true,
+                    "refId": "A",
+                    "resultFormat": "time_series",
+                    "select": [
+                        [
+                            {
+                                "params": [
+                                    "active"
+                                ],
+                                "type": "field"
+                            },
+                            {
+                                "params": [],
+                                "type": "count"
+                            }
+                        ]
+                    ],
+                    "tags": [
+                        {
+                            "key": "host::tag",
+                            "operator": "=",
+                            "value": "docker-telegraf"
+                        },
+                        {
+                            "condition": "AND",
+                            "key": "customer::tag",
+                            "operator": "=",
+                            "value": "DevOpsea"
+                        },
+                        {
+                            "condition": "AND",
+                            "key": "os::tag",
+                            "operator": "=",
+                            "value": "Linux"
+                        },
+                        {
+                            "condition": "AND",
+                            "key": "port::tag",
+                            "operator": "=",
+                            "value": "80"
+                        }
+                    ]
+                }
+            ],
+            "title": "Nginx - Connections",
+            "type": "stat"
+        },
+        {
+            "datasource": {
+                "type": "influxdb",
+                "uid": "adu8m69nh8phcc"
+            },
+            "description": "",
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
                         "mode": "palette-classic"
                     },
                     "custom": {
@@ -719,9 +1003,9 @@
             },
             "gridPos": {
                 "h": 5,
-                "w": 4,
-                "x": 12,
-                "y": 1
+                "w": 6,
+                "x": 0,
+                "y": 6
             },
             "id": 20,
             "options": {
@@ -884,9 +1168,9 @@
             },
             "gridPos": {
                 "h": 5,
-                "w": 4,
-                "x": 16,
-                "y": 1
+                "w": 6,
+                "x": 6,
+                "y": 6
             },
             "id": 21,
             "options": {
@@ -1049,9 +1333,9 @@
             },
             "gridPos": {
                 "h": 5,
-                "w": 4,
-                "x": 20,
-                "y": 1
+                "w": 6,
+                "x": 12,
+                "y": 6
             },
             "id": 22,
             "options": {
@@ -1150,6 +1434,136 @@
             "type": "timeseries"
         },
         {
+            "datasource": {
+                "type": "influxdb",
+                "uid": "adu8m69nh8phcc"
+            },
+            "description": "",
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "mappings": [
+                        {
+                            "options": {
+                                "0": {
+                                    "color": "red",
+                                    "index": 0,
+                                    "text": "No Requests"
+                                }
+                            },
+                            "type": "value"
+                        }
+                    ],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            },
+                            {
+                                "color": "red",
+                                "value": 80
+                            }
+                        ]
+                    },
+                    "unit": "string"
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 5,
+                "w": 3,
+                "x": 21,
+                "y": 6
+            },
+            "id": 29,
+            "options": {
+                "colorMode": "value",
+                "graphMode": "area",
+                "justifyMode": "auto",
+                "orientation": "auto",
+                "percentChangeColorMode": "standard",
+                "reduceOptions": {
+                    "calcs": [
+                        "lastNotNull"
+                    ],
+                    "fields": "",
+                    "values": false
+                },
+                "showPercentChange": false,
+                "textMode": "auto",
+                "wideLayout": true
+            },
+            "pluginVersion": "11.1.3",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "influxdb",
+                        "uid": "adu8m69nh8phcc"
+                    },
+                    "groupBy": [
+                        {
+                            "params": [
+                                "1m"
+                            ],
+                            "type": "time"
+                        }
+                    ],
+                    "measurement": "nginx",
+                    "orderByTime": "ASC",
+                    "policy": "default",
+                    "query": "SELECT sum(\"requests\") \nFROM \"nginx\" \nWHERE \"host\" = 'docker-telegraf' \n  AND \"customer\" = 'DevOpsea' \n  AND \"os\" = 'Linux' \n  AND \"port\" = '80' \n  AND $timeFilter \nGROUP BY time(5s) fill(null)",
+                    "rawQuery": true,
+                    "refId": "A",
+                    "resultFormat": "time_series",
+                    "select": [
+                        [
+                            {
+                                "params": [
+                                    "active"
+                                ],
+                                "type": "field"
+                            },
+                            {
+                                "params": [],
+                                "type": "count"
+                            }
+                        ]
+                    ],
+                    "tags": [
+                        {
+                            "key": "host::tag",
+                            "operator": "=",
+                            "value": "docker-telegraf"
+                        },
+                        {
+                            "condition": "AND",
+                            "key": "customer::tag",
+                            "operator": "=",
+                            "value": "DevOpsea"
+                        },
+                        {
+                            "condition": "AND",
+                            "key": "os::tag",
+                            "operator": "=",
+                            "value": "Linux"
+                        },
+                        {
+                            "condition": "AND",
+                            "key": "port::tag",
+                            "operator": "=",
+                            "value": "80"
+                        }
+                    ]
+                }
+            ],
+            "title": "Nginx - Requests",
+            "type": "stat"
+        },
+        {
             "collapsed": false,
             "datasource": {
                 "type": "influxdb",
@@ -1159,7 +1573,7 @@
                 "h": 1,
                 "w": 24,
                 "x": 0,
-                "y": 6
+                "y": 11
             },
             "id": 14,
             "panels": [],
@@ -1285,7 +1699,7 @@
                 "h": 9,
                 "w": 8,
                 "x": 0,
-                "y": 7
+                "y": 12
             },
             "id": 15,
             "options": {
@@ -1485,7 +1899,7 @@
                 "h": 9,
                 "w": 8,
                 "x": 8,
-                "y": 7
+                "y": 12
             },
             "id": 16,
             "options": {
@@ -1670,7 +2084,7 @@
                 "h": 9,
                 "w": 8,
                 "x": 16,
-                "y": 7
+                "y": 12
             },
             "id": 17,
             "options": {
@@ -1828,7 +2242,7 @@
                 "h": 1,
                 "w": 24,
                 "x": 0,
-                "y": 16
+                "y": 21
             },
             "id": 23,
             "panels": [],
@@ -1910,7 +2324,7 @@
                 "h": 9,
                 "w": 8,
                 "x": 0,
-                "y": 17
+                "y": 22
             },
             "id": 24,
             "options": {
@@ -2080,7 +2494,7 @@
                 "h": 9,
                 "w": 8,
                 "x": 8,
-                "y": 17
+                "y": 22
             },
             "id": 25,
             "options": {
@@ -2233,7 +2647,7 @@
                 "h": 9,
                 "w": 8,
                 "x": 16,
-                "y": 17
+                "y": 22
             },
             "id": 26,
             "options": {
@@ -2331,7 +2745,7 @@
                 "h": 1,
                 "w": 24,
                 "x": 0,
-                "y": 26
+                "y": 31
             },
             "id": 7,
             "panels": [],
@@ -2429,8 +2843,7 @@
                         "mode": "absolute",
                         "steps": [
                             {
-                                "color": "transparent",
-                                "value": null
+                                "color": "transparent"
                             },
                             {
                                 "color": "red",
@@ -2446,7 +2859,7 @@
                 "h": 9,
                 "w": 8,
                 "x": 0,
-                "y": 27
+                "y": 32
             },
             "id": 3,
             "options": {
@@ -2618,8 +3031,7 @@
                         "mode": "absolute",
                         "steps": [
                             {
-                                "color": "red",
-                                "value": null
+                                "color": "red"
                             },
                             {
                                 "color": "transparent",
@@ -2635,7 +3047,7 @@
                 "h": 9,
                 "w": 8,
                 "x": 8,
-                "y": 27
+                "y": 32
             },
             "id": 8,
             "options": {
@@ -2793,8 +3205,7 @@
                         "mode": "absolute",
                         "steps": [
                             {
-                                "color": "red",
-                                "value": null
+                                "color": "red"
                             },
                             {
                                 "color": "transparent",
@@ -2810,7 +3221,7 @@
                 "h": 9,
                 "w": 8,
                 "x": 16,
-                "y": 27
+                "y": 32
             },
             "id": 9,
             "options": {
@@ -2901,7 +3312,7 @@
             "type": "timeseries"
         }
     ],
-    "refresh": "30s",
+    "refresh": "5s",
     "schemaVersion": 39,
     "tags": [],
     "templating": {
@@ -2915,6 +3326,6 @@
     "timezone": "",
     "title": "First dashboard",
     "uid": "0D88mZa7k",
-    "version": 22,
+    "version": 66,
     "weekStart": ""
 }
