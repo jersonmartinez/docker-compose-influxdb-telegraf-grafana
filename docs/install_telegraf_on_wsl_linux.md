@@ -60,6 +60,9 @@ nano /etc/telegraf/telegraf.conf
 
 Esta guía detalla la configuración del archivo `telegraf.conf` para la instalación de Telegraf en un sistema Linux Debian. La configuración incluye etiquetas globales, parámetros del agente, plugins de salida y entrada.
 
+> [!NOTE]  
+> Puede checar la explicación de cada segmento de la [configuración de Telegraf para Windows Subsystem for Linux - Debian](https://github.com/jersonmartinez/docker-compose-influxdb-telegraf-grafana/blob/main/docs/explaining_telegraf.md#monitorizar-debian-desde-windows-subsystem-for-linux-wsl).
+
 #### Configuración Global
 ##### [global_tags]
 ```toml

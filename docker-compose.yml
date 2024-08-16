@@ -4,26 +4,49 @@ services:
     container_name: telegraf
     restart: always
     volumes:
-    - ./telegraf/telegraf.conf:/etc/telegraf/telegraf.conf:ro
+      - ./telegraf/telegraf.conf:/etc/telegraf/telegraf.conf:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
     depends_on:
       - influxdb
+      - nginx
     links:
       - influxdb
+      - nginx
     ports:
-    - '8125:8125'
+      - '8125:8125'
+    networks:
+      - monitoring
 
   telegraf_second:
     image: telegraf
     container_name: telegraf_second
     restart: always
     volumes:
-    - ./telegraf/telegraf_second.conf:/etc/telegraf/telegraf.conf:ro
+      - ./telegraf/telegraf_second.conf:/etc/telegraf/telegraf.conf:ro
     depends_on:
       - influxdb
     links:
       - influxdb
     ports:
-    - '8126:8126'
+      - '8126:8126'
+    networks:
+      - monitoring
+
+  nginx:
+    image: nginx:alpine
+    container_name: nginx
+    restart: always
+    volumes:
+      - ./nginx:/etc/nginx/conf.d
+    ports:
+      - '8080:80'
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 2
+    networks:
+      - monitoring
 
   influxdb:
     image: influxdb:1.8-alpine
@@ -37,6 +60,8 @@ services:
       - '8086:8086'
     volumes:
       - influxdb_data:/var/lib/influxdb
+    networks:
+      - monitoring
 
   grafana:
     image: grafana/grafana-enterprise
@@ -47,14 +72,19 @@ services:
     environment:
       - GF_SECURITY_ADMIN_USER=admin
       - GF_SECURITY_ADMIN_PASSWORD=admin
-      - GF_INSTALL_PLUGINS=
     links:
       - influxdb
     ports:
       - '3000:3000'
     volumes:
       - grafana_data:/var/lib/grafana
-      
+    networks:
+      - monitoring
+
 volumes:
   grafana_data: {}
   influxdb_data: {}
+
+networks:
+  monitoring:
+    external: true

@@ -195,6 +195,10 @@ Las métricas de memoria te proporcionan información sobre el uso de la memoria
 ```
 Monitorizar el archivo de paginación puede ayudarte a identificar problemas de memoria cuando el sistema está usando swap.
 
+> [!NOTE]  
+> Puede checar la explicación de cada segmento de la [configuración de Telegraf para Windows](https://github.com/jersonmartinez/docker-compose-influxdb-telegraf-grafana/blob/main/docs/explaining_telegraf.md#monitorizar-windows-10--11).
+
+
 #### Recomendaciones Adicionales
 1. **Seguridad**:
     - Considera encriptar las credenciales y usar HTTPS para las conexiones a InfluxDB.
