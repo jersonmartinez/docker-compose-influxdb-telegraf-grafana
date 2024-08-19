@@ -54,7 +54,7 @@
         },
         {
             "datasource": {},
-            "description": "",
+            "description": "This panel shows the CPU usage for the Docker containers monitored by Telegraf.",
             "fieldConfig": {
                 "defaults": {
                     "color": {
@@ -210,7 +210,7 @@
         },
         {
             "datasource": {},
-            "description": "",
+            "description": "This panel shows the memory usage for the Docker containers monitored by Telegraf.",
             "fieldConfig": {
                 "defaults": {
                     "color": {
@@ -365,7 +365,7 @@
         },
         {
             "datasource": {},
-            "description": "",
+            "description": "This panel shows the disk usage for the Docker containers monitored by Telegraf.",
             "fieldConfig": {
                 "defaults": {
                     "color": {
@@ -558,7 +558,7 @@
                 "type": "influxdb",
                 "uid": "ddsr98u88mygwb"
             },
-            "description": "",
+            "description": "This panel shows the CPU usage for the Docker containers monitored by Telegraf.",
             "fieldConfig": {
                 "defaults": {
                     "color": {
@@ -593,7 +593,7 @@
                             "mode": "none"
                         },
                         "thresholdsStyle": {
-                            "mode": "line+area"
+                            "mode": "off"
                         }
                     },
                     "mappings": [],
@@ -749,7 +749,7 @@
                 "notifications": []
             },
             "datasource": {},
-            "description": "",
+            "description": "This panel shows the memory usage for the Docker containers monitored by Telegraf.",
             "fieldConfig": {
                 "defaults": {
                     "color": {
@@ -784,7 +784,7 @@
                             "mode": "none"
                         },
                         "thresholdsStyle": {
-                            "mode": "line+area"
+                            "mode": "off"
                         }
                     },
                     "mappings": [],
@@ -939,7 +939,7 @@
                 "notifications": []
             },
             "datasource": {},
-            "description": "",
+            "description": "This panel shows the disk usage for the Docker containers monitored by Telegraf.",
             "fieldConfig": {
                 "defaults": {
                     "color": {
@@ -974,7 +974,7 @@
                             "mode": "none"
                         },
                         "thresholdsStyle": {
-                            "mode": "line+area"
+                            "mode": "off"
                         }
                     },
                     "mappings": [],
@@ -1153,7 +1153,7 @@
                 "notifications": []
             },
             "datasource": {},
-            "description": "",
+            "description": "This panel shows the CPU usage for the Debian system monitored by Telegraf.",
             "fieldConfig": {
                 "defaults": {
                     "color": {
@@ -1360,7 +1360,7 @@
                 "type": "influxdb",
                 "uid": "ddsr98u88mygwb"
             },
-            "description": "",
+            "description": "This panel shows the memory usage for the Debian system monitored by Telegraf.",
             "fieldConfig": {
                 "defaults": {
                     "color": {
@@ -1370,7 +1370,6 @@
                         "axisBorderShow": true,
                         "axisCenteredZero": false,
                         "axisColorMode": "series",
-                        "axisGridShow": true,
                         "axisLabel": "Gigabyte",
                         "axisPlacement": "left",
                         "barAlignment": 0,
@@ -1548,7 +1547,7 @@
                 "type": "influxdb",
                 "uid": "ddsr98u88mygwb"
             },
-            "description": "",
+            "description": "This panel shows the disk usage for the Debian system monitored by Telegraf.",
             "fieldConfig": {
                 "defaults": {
                     "color": {
@@ -1830,7 +1829,7 @@
                 "type": "influxdb",
                 "uid": "ddsr98u88mygwb"
             },
-            "description": "",
+            "description": "This panel shows the CPU usage for the Windows 11 system monitored by Telegraf.",
             "fieldConfig": {
                 "defaults": {
                     "color": {
@@ -2022,7 +2021,7 @@
                 "type": "influxdb",
                 "uid": "ddsr98u88mygwb"
             },
-            "description": "",
+            "description": "This panel shows the memory usage for the Windows 11 system monitored by Telegraf.",
             "fieldConfig": {
                 "defaults": {
                     "color": {
@@ -2200,7 +2199,7 @@
                 "type": "influxdb",
                 "uid": "ddsr98u88mygwb"
             },
-            "description": "",
+            "description": "This panel shows the disk usage for the Windows 11 system monitored by Telegraf.",
             "fieldConfig": {
                 "defaults": {
                     "color": {

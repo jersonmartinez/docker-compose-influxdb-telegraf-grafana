@@ -184,6 +184,45 @@ Proporciona una visión general del estado del sistema, ayudando a detectar posi
 
 Este archivo de configuración establece una base sólida para monitorizar un sistema Linux utilizando Telegraf y enviando los datos a InfluxDB para su análisis y visualización.
 
+### Ejemplo de Configuración Personalizada
+
+A continuación, se muestra un ejemplo de cómo se puede personalizar la configuración de Telegraf para adaptarse a necesidades específicas. Supongamos que queremos agregar un plugin de entrada para monitorear la temperatura de la CPU y un plugin de salida para enviar datos a una segunda instancia de InfluxDB.
+
+#### Plugin de Entrada para Temperatura de la CPU
+
+```toml
+[[inputs.sensors]]
+  remove_zero = true
+```
+
+#### Descripción
+Este plugin recoge métricas de los sensores de temperatura del sistema.
+
+- **remove_zero** = `true`: Elimina las lecturas de temperatura que son cero, ya que generalmente indican sensores no utilizados.
+
+#### Función en la Monitorización
+Monitorizar la temperatura de la CPU es crucial para evitar el sobrecalentamiento, que puede llevar a una disminución del rendimiento o incluso a daños en el hardware.
+
+#### Plugin de Salida para Segunda Instancia de InfluxDB
+
+```toml
+[[outputs.influxdb]]
+  urls = ["http://192.168.0.8:8086"]
+  database = "backup_influx"
+  username = "backup_admin"
+  password = "backup_password"
+```
+
+#### Descripción
+Este bloque define una segunda instancia de InfluxDB donde se enviarán las métricas.
+
+- **urls**: URL del segundo servidor InfluxDB.
+- **database**: Nombre de la base de datos en la segunda instancia de InfluxDB.
+- **username** y **password**: Credenciales de acceso para la segunda instancia.
+
+#### Función en la Monitorización
+Enviar datos a una segunda instancia de InfluxDB proporciona redundancia y asegura que las métricas estén disponibles incluso si la primera instancia falla.
+
 ---
 
 # Monitorizar Debian desde Windows Subsystem for Linux (WSL)
