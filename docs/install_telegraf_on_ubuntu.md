@@ -136,6 +136,25 @@ Mem:           7.8Gi       1.1Gi       5.8Gi        36Mi       1.1Gi       6.6Gi
 Swap:          4.0Gi          0B       4.0Gi
 ```
 
+**Monitorización de CPU en Telegraf**
+Para ver el uso de CPU en tiempo real:
+```bash
+top
+```
+O para una vista más detallada del uso de CPU (`mpstat 1 5`):
+```bash
+$ mpstat 1 5
+Linux 6.8.0-40-generic (ubuntu) 	08/20/2024 	_x86_64_	(3 CPU)
+
+04:10:14 PM  CPU    %usr   %nice    %sys %iowait    %irq   %soft  %steal  %guest  %gnice   %idle
+04:10:15 PM  all    0.34    0.00    1.72    0.00    0.00    0.69    0.00    0.00    0.00   97.24
+04:10:16 PM  all    1.38    0.00    3.81    0.00    0.00    1.73    0.00    0.00    0.00   93.08
+04:10:17 PM  all    1.44    0.00    5.42    0.00    0.00    0.36    0.00    0.00    0.00   92.78
+04:10:18 PM  all    2.54    0.00    5.07    0.36    0.00    1.45    0.00    0.00    0.00   90.58
+04:10:19 PM  all    0.70    0.00    2.09    0.00    0.00    0.70    0.00    0.00    0.00   96.52
+Average:     all    1.27    0.00    3.59    0.07    0.00    0.99    0.00    0.00    0.00   94.08
+```
+Esto mostrará estadísticas de CPU cada segundo durante 5 segundos.
 
 **Verificar las métricas recolectadas por Telegraf**
 Para verificar que Telegraf está recolectando métricas de disco, puedes ejecutar Telegraf manualmente en modo debug:
