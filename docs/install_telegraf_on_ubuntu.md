@@ -160,6 +160,7 @@ Average:     all    1.27    0.00    3.59    0.07    0.00    0.99    0.00    0.00
 Esto mostrará estadísticas de CPU cada segundo durante 5 segundos.
 
 **Verificar las métricas recolectadas por Telegraf**
+
 Para verificar que Telegraf está recolectando métricas de disco, puedes ejecutar Telegraf manualmente en modo debug:
 ```bash
 sudo telegraf --config /etc/telegraf/telegraf.conf --test | grep disk
