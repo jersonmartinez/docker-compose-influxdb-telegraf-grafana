@@ -44,18 +44,14 @@ docker-compose up -d
 
 ### Using the repository
 
-1. **Accessing InfluxDB**:
-   - Open your browser and go to `http://localhost:8086`
-   - Default username and password are both `admin`
-
-2. **Configuring Telegraf**:
+1. **Configuring Telegraf**:
    - Telegraf configuration files are located in the `telegraf` directory.
    - Modify the configuration files as needed and restart the Telegraf container:
      ```bash
      docker-compose restart telegraf
      ```
 
-3. **Viewing metrics in Grafana**:
+2. **Viewing metrics in Grafana**:
    - Open Grafana and add InfluxDB as a data source.
    - Create dashboards and panels to visualize the metrics collected by Telegraf.
 
