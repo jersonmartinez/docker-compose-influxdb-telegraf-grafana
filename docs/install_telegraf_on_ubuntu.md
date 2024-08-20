@@ -74,6 +74,7 @@ telegraf --config /etc/telegraf/telegraf.conf
 ```
 
 **Reiniciar Telegraf después de cambios**: 
+
 Después de realizar cambios en la configuración, asegúrate de reiniciar el servicio Telegraf para aplicar los cambios:
 ```bash
 sudo systemctl status telegraf
@@ -128,6 +129,7 @@ tmpfs           795M  136K  795M   1% /run/user/1000
 ```
 
 **Monitorización de memoria RAM en Telegraf**
+
 En este caso, a la máquina se le ha otorgado 12GB.
 ```
 free -h
@@ -137,6 +139,7 @@ Swap:          4.0Gi          0B       4.0Gi
 ```
 
 **Monitorización de CPU en Telegraf**
+
 Para ver el uso de CPU en tiempo real:
 ```bash
 top
