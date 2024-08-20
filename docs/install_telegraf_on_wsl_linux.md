@@ -105,7 +105,7 @@ Esta guía detalla la configuración del archivo `telegraf.conf` para la instala
 ##### [[outputs.influxdb]]
 ```toml
 [[outputs.influxdb]]
-   urls = ["http://192.168.0.7:8086"]
+   urls = ["http://192.168.0.2:8086"]
    database = "influx"
    username = "admin"
    password = "admin"

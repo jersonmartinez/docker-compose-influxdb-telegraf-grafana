@@ -251,7 +251,7 @@
                     ]
                 }
             ],
-            "title": "CPU",
+            "title": "CPU Usage - Docker Telegraf",
             "type": "timeseries"
         },
         {
@@ -451,7 +451,7 @@
                     ]
                 }
             ],
-            "title": "Memory",
+            "title": "Memory Usage - Docker Telegraf",
             "type": "timeseries"
         },
         {
@@ -651,7 +651,7 @@
                     ]
                 }
             ],
-            "title": "Disk",
+            "title": "Disk Usage - Docker Telegraf",
             "type": "timeseries"
         },
         {
@@ -805,7 +805,7 @@
                     ]
                 }
             ],
-            "title": "Nginx Status",
+            "title": "Nginx Status - Docker Telegraf",
             "type": "stat"
         },
         {
@@ -935,7 +935,7 @@
                     ]
                 }
             ],
-            "title": "Nginx - Connections",
+            "title": "Nginx Active Connections - Docker Telegraf",
             "type": "stat"
         },
         {
@@ -1100,7 +1100,7 @@
                     ]
                 }
             ],
-            "title": "CPU",
+            "title": "CPU Usage - Docker Telegraf Second",
             "type": "timeseries"
         },
         {
@@ -1265,7 +1265,7 @@
                     ]
                 }
             ],
-            "title": "Memory",
+            "title": "Memory Usage - Docker Telegraf Second",
             "type": "timeseries"
         },
         {
@@ -1430,7 +1430,7 @@
                     ]
                 }
             ],
-            "title": "Disk",
+            "title": "Disk Usage - Docker Telegraf Second",
             "type": "timeseries"
         },
         {
@@ -1560,7 +1560,7 @@
                     ]
                 }
             ],
-            "title": "Nginx - Requests",
+            "title": "Nginx Requests - Docker Telegraf",
             "type": "stat"
         },
         {
@@ -1793,7 +1793,7 @@
                     ]
                 }
             ],
-            "title": "CPU",
+            "title": "CPU Usage - WSL Debian",
             "type": "timeseries"
         },
         {
@@ -1978,7 +1978,7 @@
                     ]
                 }
             ],
-            "title": "Memory",
+            "title": "Memory Usage - WSL Debian",
             "type": "timeseries"
         },
         {
@@ -2233,7 +2233,7 @@
                     ]
                 }
             ],
-            "title": "Disk",
+            "title": "Disk Usage - WSL Debian",
             "type": "timeseries"
         },
         {
@@ -2420,7 +2420,7 @@
                     ]
                 }
             ],
-            "title": "CPU",
+            "title": "CPU Usage - Ubuntu 24.04",
             "type": "timeseries"
         },
         {
@@ -2573,7 +2573,7 @@
                     ]
                 }
             ],
-            "title": "Memory",
+            "title": "Memory Usage - Ubuntu 24.04",
             "type": "timeseries"
         },
         {
@@ -2732,7 +2732,7 @@
                     ]
                 }
             ],
-            "title": "Disk",
+            "title": "Disk Usage - Ubuntu 24.04",
             "type": "timeseries"
         },
         {
@@ -2946,7 +2946,7 @@
                     ]
                 }
             ],
-            "title": "CPU",
+            "title": "CPU Usage - Windows 11",
             "type": "timeseries"
         },
         {
@@ -3120,7 +3120,7 @@
                     ]
                 }
             ],
-            "title": "Memory",
+            "title": "Memory Usage - Windows 11",
             "type": "timeseries"
         },
         {
@@ -3308,7 +3308,7 @@
                     ]
                 }
             ],
-            "title": "Disk",
+            "title": "Disk Usage - Windows 11",
             "type": "timeseries"
         }
     ],

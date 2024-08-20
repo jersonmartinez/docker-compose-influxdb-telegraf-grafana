@@ -57,7 +57,7 @@ Este bloque define cómo y cuándo se recopilan y envían las métricas. Configu
 
 ```toml
 [[outputs.influxdb]]
-  urls = ["http://192.168.0.7:8086"]
+  urls = ["http://192.168.0.2:8086"]
   timeout = "5s"
   database = "influx"
   username = "admin"
@@ -384,7 +384,7 @@ La frecuencia de recolección y envío de métricas se mantiene igual a 15 segun
 
 URL de conexión:
 ```toml
-urls = ["http://192.168.0.7:8086"]
+urls = ["http://192.168.0.2:8086"]
 ```
 
 No hay cambios en la configuración del plugin de salida para InfluxDB entre los diferentes sistemas operativos. La URL, la base de datos y las credenciales permanecen constantes.
