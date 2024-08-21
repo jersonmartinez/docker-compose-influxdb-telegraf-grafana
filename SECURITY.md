@@ -15,7 +15,7 @@ We currently provide security updates for the following versions of our project:
 We take the security of our project seriously. If you discover a security vulnerability, please follow these steps:
 
 1. **Do not** disclose the vulnerability publicly.
-2. Send a detailed report to our security team at security@example.com.
+2. Send a detailed report to our security team at jersonmartinezsm@gmail.com.
 3. Include the following in your report:
    - A description of the vulnerability
    - Steps to reproduce the issue
