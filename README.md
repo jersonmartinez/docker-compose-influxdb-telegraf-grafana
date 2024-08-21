@@ -1,69 +1,90 @@
 # Monitoring with Docker Compose using InfluxDB, Telegraf and Grafana
-This is a docker compose to create containers about InfluxDB, Telegraf and Grafana.
 
-### Infrastructure model
+This repository contains a Docker Compose setup for creating containers for InfluxDB, Telegraf, and Grafana, providing a comprehensive monitoring solution.
 
-![image](https://github.com/user-attachments/assets/cbac355d-2c26-469b-a953-650b083a7eda)
+## Infrastructure Model
 
-#### Clone the repository:
-```bash copy
+![Infrastructure Model](https://github.com/user-attachments/assets/cbac355d-2c26-469b-a953-650b083a7eda)
+
+## Quick Start
+
+### Clone the Repository
+
+```bash
 git clone https://github.com/jersonmartinez/docker-compose-influxdb-telegraf-grafana.git
 cd docker-compose-influxdb-telegraf-grafana
 ```
 
-#### Apply:
+### Deploy the Stack
 
 ```bash
 docker-compose up -d
 ```
-![image](https://github.com/user-attachments/assets/0a9f8a91-66f6-4aec-a71c-16f5d6051b59)
 
-### Setting up the repository
+![Deployment Output](https://github.com/user-attachments/assets/0a9f8a91-66f6-4aec-a71c-16f5d6051b59)
 
-1. **Clone the repository**:
+## Detailed Setup Guide
+
+1. **Clone the Repository**:
    ```bash
    git clone https://github.com/jersonmartinez/docker-compose-influxdb-telegraf-grafana.git
    cd docker-compose-influxdb-telegraf-grafana
    ```
 
-2. **Start the services**:
+2. **Start the Services**:
    ```bash
    docker-compose up -d
    ```
 
-3. **Verify the services**:
-   - Check if the containers are running:
-     ```bash
-     docker-compose ps
-     ```
+3. **Verify the Services**:
+   ```bash
+   docker-compose ps
+   ```
 
 4. **Access Grafana**:
-   - Open your browser and go to `http://localhost:3000`
-   - Default username and password are both `admin`
+   - Open your browser and navigate to `http://localhost:3000`
+   - Default credentials: username and password are both `admin`
 
-### Using the repository
+## Using the Repository
 
-1. **Configuring Telegraf**:
-   - Telegraf configuration files are located in the `telegraf` directory.
-   - Modify the configuration files as needed and restart the Telegraf container:
-     ```bash
-     docker-compose restart telegraf
-     ```
+### Configuring Telegraf
 
-2. **Viewing metrics in Grafana**:
-   - Open Grafana and add InfluxDB as a data source.
-   - Create dashboards and panels to visualize the metrics collected by Telegraf.
+- Telegraf configuration files are located in the `telegraf` directory.
+- After modifying the configuration files, restart the Telegraf container:
+  ```bash
+  docker-compose restart telegraf
+  ```
 
-### Purpose of each service
+### Viewing Metrics in Grafana
 
-1. **InfluxDB**:
-   - InfluxDB is a time-series database designed to handle high write and query loads. It is used to store the metrics collected by Telegraf.
+1. Open Grafana and add InfluxDB as a data source.
+2. Create dashboards and panels to visualize the metrics collected by Telegraf.
 
-2. **Telegraf**:
-   - Telegraf is an agent for collecting, processing, aggregating, and writing metrics. It collects metrics from the host and Docker containers and sends them to InfluxDB.
+## Telegraf Configuration for Different Environments
 
-3. **Grafana**:
-   - Grafana is a web-based interface for visualizing metrics stored in InfluxDB. It allows you to create dashboards and panels to monitor the metrics collected by Telegraf.
+We provide detailed guides for configuring Telegraf in various environments:
 
-4. **Nginx**:
-   - Nginx is a web server that provides a web server to serve static content and proxy requests.
+- [Telegraf on Ubuntu](docs/install_telegraf_on_ubuntu.md)
+- [Telegraf on Windows Subsystem for Linux (WSL) - Debian](docs/install_telegraf_on_wsl_linux.md)
+- [Telegraf on Windows](docs/install_telegraf_on_windows.md)
+- [Telegraf in Docker](docs/explaining_telegraf.md#monitorizar-contenedores-docker)
+
+For a comprehensive explanation of Telegraf configuration across different platforms, refer to our [Telegraf Configuration Guide](docs/explaining_telegraf.md).
+
+## Service Descriptions
+
+1. **InfluxDB**: A time-series database designed for high write and query loads, used to store metrics collected by Telegraf.
+
+2. **Telegraf**: An agent for collecting, processing, aggregating, and writing metrics. It gathers data from the host and Docker containers, sending it to InfluxDB.
+
+3. **Grafana**: A web-based interface for visualizing metrics stored in InfluxDB, allowing creation of dashboards and panels for monitoring.
+
+4. **Nginx**: A web server providing static content serving and request proxying capabilities.
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
